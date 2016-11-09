@@ -1,2 +1,6 @@
 .vs/DopeyWar/v14/.suo
 *.cache
+DopeyWar/bin/
+DopeyWar/obj/
+DopeyWar/obj/Debug/DopeyWar.csproj.FileListAbsolute.txt
+.vs/DopeyWar/v14/.suo
