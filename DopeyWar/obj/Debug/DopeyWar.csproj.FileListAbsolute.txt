@@ -7,3 +7,4 @@ C:\Users\java\Documents\GitHub\dopey3\DopeyWar\obj\Debug\DopeyWar.Properties.Res
 C:\Users\java\Documents\GitHub\dopey3\DopeyWar\obj\Debug\DopeyWar.csproj.GenerateResource.Cache
 C:\Users\java\Documents\GitHub\dopey3\DopeyWar\obj\Debug\DopeyWar.exe
 C:\Users\java\Documents\GitHub\dopey3\DopeyWar\obj\Debug\DopeyWar.pdb
+C:\Users\java\Documents\GitHub\dopey3\DopeyWar\obj\Debug\DopeyWar.MapForm.resources
