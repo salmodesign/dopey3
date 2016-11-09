@@ -1,0 +1,2 @@
+C:\Users\java\Documents\Visual Studio 2015\Projects\02 Objektorienterad\Ovningar\DopeyWar\DopeyWar\bin\Debug\DopeyWar.exe.config
+C:\Users\java\Documents\GitHub\dopey3\DopeyWar\bin\Debug\DopeyWar.exe.config
