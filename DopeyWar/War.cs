@@ -15,8 +15,6 @@ namespace DopeyWar
         public War()
         {
             _nationList = new List<Nation>();
-            
-
 
             _nationList.Add(new Nation("Sweden", 3, 0, 0));
             _nationList.Add(new Nation("USA", 3, 0, 0));
@@ -28,10 +26,6 @@ namespace DopeyWar
             _nationList.Add(new Nation("Australia", 3, 0, 0));
             _nationList.Add(new Nation("United Kingdom", 3, 0, 0));
             _nationList.Add(new Nation("Iraq", 3, 0, 0));
-
-            _attacker = _nationList[0];
-            _defender = _nationList[2];
-
         }
 
         public Nation WarStrike(MapForm mf)
@@ -39,7 +33,7 @@ namespace DopeyWar
             Randomize();        //sets attacker and defender
             mf.DrawMissile(_attacker, _defender);
             _defender.MakeDamage();
-            //_nationList.Sort();     //Implementera IComparable för att sortering ska funka
+            _nationList.Sort();    
             mf.UpDateList(_nationList);
 
             if (_defender.Endurance == 0)
@@ -53,7 +47,13 @@ namespace DopeyWar
 
         private void Randomize()
         {
-            
+            Random rno = new Random(Guid.NewGuid().GetHashCode());
+            _attacker = _nationList[rno.Next(0, 10)];
+            _defender = _nationList[rno.Next(0, 10)];
+            if (_attacker == _defender)
+                Randomize();
+            if (_attacker.Endurance == 0 || _defender.Endurance == 0)
+                Randomize();
         }
 
         private bool CheckIfWinner()

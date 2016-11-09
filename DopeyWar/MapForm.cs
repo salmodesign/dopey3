@@ -23,6 +23,7 @@ namespace DopeyWar
         private void button1_Click(object sender, EventArgs e)
         {
             _ww3.WarStrike(this);
+            
         }
 
         public void DrawMissile(Nation attacker, Nation defender)

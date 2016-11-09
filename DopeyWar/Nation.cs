@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace DopeyWar
 {
-    public class Nation
+    public class Nation : IComparable
     {
         private string _name;
         private int _endurance;
@@ -45,6 +45,16 @@ namespace DopeyWar
         public void MakeDamage()
         {
             _endurance--;
+        }
+
+        public int CompareTo(object obj)
+        {
+            Nation otherNation = (Nation)obj;
+            int result = _endurance.CompareTo(otherNation._endurance);
+            if (result == 0)     //if endurance is equal, sort on country name
+                return _name.CompareTo(otherNation._name);
+            else
+                return result;
         }
     }
 }
