@@ -32,7 +32,20 @@ namespace DopeyWar
 
         public void DrawMissile(Nation attacker, Nation defender)
         {
+            Pen myPen;
+            myPen = new Pen(Color.LightBlue, 3);
+            Graphics formGraphics = this.CreateGraphics();
 
+            int x = attacker.Coordinates.X + (defender.Coordinates.X - attacker.Coordinates.X) / 2;
+            int y = attacker.Coordinates.Y + (defender.Coordinates.Y - attacker.Coordinates.Y) / 2;
+
+            Random rno = new Random(Guid.NewGuid().GetHashCode());
+
+            Point midPoint = new Point(x, y - rno.Next(10,100));
+            Point hittedRandTarget = new Point(defender.Coordinates.X + rno.Next(-20, 20), defender.Coordinates.Y + rno.Next(-20, 20));
+            Point[] points = new Point[3] { attacker.Coordinates, midPoint, hittedRandTarget};
+            formGraphics.DrawCurve(myPen, points);
+            formGraphics.Dispose();
         }
 
         public void UpDateList(List<Nation> ListToShow)
@@ -50,7 +63,7 @@ namespace DopeyWar
 
         public void DisplayDefeated(Nation defender)
         {
-
+            
         }
 
     }

@@ -35,10 +35,10 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(21, 504);
+            this.button1.Location = new System.Drawing.Point(11, 517);
             this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(134, 47);
+            this.button1.Size = new System.Drawing.Size(154, 47);
             this.button1.TabIndex = 0;
             this.button1.Text = "Start war";
             this.button1.UseVisualStyleBackColor = true;
@@ -58,9 +58,9 @@
             this.statsListView.Alignment = System.Windows.Forms.ListViewAlignment.SnapToGrid;
             this.statsListView.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
             this.statsListView.Enabled = false;
-            this.statsListView.Location = new System.Drawing.Point(21, 167);
+            this.statsListView.Location = new System.Drawing.Point(12, 167);
             this.statsListView.Name = "statsListView";
-            this.statsListView.Size = new System.Drawing.Size(134, 332);
+            this.statsListView.Size = new System.Drawing.Size(154, 332);
             this.statsListView.TabIndex = 1;
             this.statsListView.UseCompatibleStateImageBehavior = false;
             this.statsListView.View = System.Windows.Forms.View.Details;
