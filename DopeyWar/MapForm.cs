@@ -14,7 +14,6 @@ namespace DopeyWar
     {
         private War _ww3;
 
-        
         protected override void OnMouseDoubleClick(MouseEventArgs e)
         {
             base.OnMouseDoubleClick(e);
@@ -71,7 +70,7 @@ namespace DopeyWar
 
         public void DisplayDefeated(Nation defender)
         {
-            
+            Controls.Add(new Label { Location = defender.Coordinates, AutoSize = true, BackColor = Color.Black, ForeColor = Color.Red, Text = "DEFEATED"}); 
         }
 
     }
