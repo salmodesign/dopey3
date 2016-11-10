@@ -54,7 +54,7 @@ namespace DopeyWar
             if (result == 0)     //if endurance is equal, sort on country name
                 return _name.CompareTo(otherNation._name);
             else
-                return result;
+                return -result;  //return the negative value so the sorting will be inverted
         }
     }
 }

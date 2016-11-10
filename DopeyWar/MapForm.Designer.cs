@@ -29,49 +29,55 @@
         private void InitializeComponent()
         {
             this.button1 = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.nationsListBox = new System.Windows.Forms.ListBox();
-            this.panel1.SuspendLayout();
+            this.mapPanel = new System.Windows.Forms.Panel();
+            this.statsListView = new System.Windows.Forms.ListView();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(323, 264);
+            this.button1.Location = new System.Drawing.Point(21, 504);
             this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(92, 21);
+            this.button1.Size = new System.Drawing.Size(134, 47);
             this.button1.TabIndex = 0;
             this.button1.Text = "Start war";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // panel1
+            // mapPanel
             // 
-            this.panel1.Controls.Add(this.nationsListBox);
-            this.panel1.Location = new System.Drawing.Point(12, 12);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(481, 431);
-            this.panel1.TabIndex = 1;
+            this.mapPanel.BackgroundImage = global::DopeyWar.Properties.Resources.worldmap;
+            this.mapPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.mapPanel.Location = new System.Drawing.Point(771, 485);
+            this.mapPanel.Name = "mapPanel";
+            this.mapPanel.Size = new System.Drawing.Size(160, 79);
+            this.mapPanel.TabIndex = 1;
             // 
-            // nationsListBox
+            // statsListView
             // 
-            this.nationsListBox.FormattingEnabled = true;
-            this.nationsListBox.Location = new System.Drawing.Point(42, 56);
-            this.nationsListBox.Name = "nationsListBox";
-            this.nationsListBox.Size = new System.Drawing.Size(164, 342);
-            this.nationsListBox.TabIndex = 0;
+            this.statsListView.Alignment = System.Windows.Forms.ListViewAlignment.SnapToGrid;
+            this.statsListView.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.statsListView.Enabled = false;
+            this.statsListView.Location = new System.Drawing.Point(21, 167);
+            this.statsListView.Name = "statsListView";
+            this.statsListView.Size = new System.Drawing.Size(134, 332);
+            this.statsListView.TabIndex = 1;
+            this.statsListView.UseCompatibleStateImageBehavior = false;
+            this.statsListView.View = System.Windows.Forms.View.Details;
             // 
             // MapForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(505, 515);
+            this.BackgroundImage = global::DopeyWar.Properties.Resources.worldmap;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.ClientSize = new System.Drawing.Size(1014, 585);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.mapPanel);
+            this.Controls.Add(this.statsListView);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "MapForm";
             this.Text = "Form1";
-            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -79,8 +85,8 @@
         #endregion
 
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.ListBox nationsListBox;
+        private System.Windows.Forms.Panel mapPanel;
+        private System.Windows.Forms.ListView statsListView;
     }
 }
 

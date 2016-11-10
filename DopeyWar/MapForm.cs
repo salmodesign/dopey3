@@ -18,11 +18,15 @@ namespace DopeyWar
         {
             InitializeComponent();
             _ww3 = new War();
+            statsListView.Columns.Add("Nation");
+            statsListView.Columns.Add("Endurance");
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            _ww3.WarStrike(this);
+            Nation winner = _ww3.WarStrike(this);
+            if (winner != null)
+                MessageBox.Show("Winner : " + winner);
             
         }
 
@@ -33,10 +37,14 @@ namespace DopeyWar
 
         public void UpDateList(List<Nation> ListToShow)
         {
-            nationsListBox.Items.Clear();
+            statsListView.Items.Clear();
+
             foreach (Nation n in ListToShow)
             {
-                nationsListBox.Items.Add(n + "\t\t" + n.Endurance.ToString());
+                string [] rowItem = new string[2];
+                rowItem[0] = n.ToString();
+                rowItem[1] = n.Endurance.ToString();
+                statsListView.Items.Add(new ListViewItem(rowItem));
             }
         }
 
@@ -44,5 +52,6 @@ namespace DopeyWar
         {
 
         }
+
     }
 }
