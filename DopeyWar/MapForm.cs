@@ -14,6 +14,14 @@ namespace DopeyWar
     {
         private War _ww3;
 
+        
+        protected override void OnMouseDoubleClick(MouseEventArgs e)
+        {
+            base.OnMouseDoubleClick(e);
+            int x = e.X; int y = e.Y;
+            MessageBox.Show("x: " + x.ToString() + " " + "y: " + y.ToString());
+        }
+
         public MapForm()
         {
             InitializeComponent();
