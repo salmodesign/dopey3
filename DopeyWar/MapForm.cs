@@ -14,14 +14,8 @@ namespace DopeyWar
     {
         private War _ww3;
         private Size _originalFormSize;
-
-        protected override void OnMouseDoubleClick(MouseEventArgs e)
-        {
-            base.OnMouseDoubleClick(e);
-            int x = e.X; int y = e.Y;
-            MessageBox.Show("x: " + x.ToString() + " " + "y: " + y.ToString());
-        }
-
+        private Timer _timer;
+        
         public MapForm()
         {
             InitializeComponent();
@@ -30,15 +24,17 @@ namespace DopeyWar
             statsListView.Columns.Add("Endurance");
 
             _originalFormSize = new Size(Size.Height, Size.Width); //Store the original form size
+
+            _timer = new Timer();
+            _timer.Interval = 1000;
+            _timer.Tick += _timer_Tick;
         }
+
+        
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Nation winner = _ww3.WarStrike(this);
-            if (winner != null)
-            {
-                Controls.Add(new Label { Location = winner.Coordinates, AutoSize = true, BackColor = Color.Black, ForeColor = Color.Green, Text = winner + "\nWINNER" });
-            }
+            StartAndStop();
         }
 
         public void DrawMissile(Nation attacker, Nation defender)
@@ -81,6 +77,34 @@ namespace DopeyWar
         private void MapForm_ResizeEnd(object sender, EventArgs e)
         {
             //Logic for changing the factor of change in size
+        }
+        protected override void OnMouseDoubleClick(MouseEventArgs e)
+        {
+            base.OnMouseDoubleClick(e);
+            int x = e.X; int y = e.Y;
+            MessageBox.Show("x: " + x.ToString() + " " + "y: " + y.ToString());
+        }
+        public void StartAndStop()
+        {
+            if (_timer.Enabled == false)
+            {
+                button1.Text = "Stop";
+                _timer.Start();
+            }
+            else
+            {
+                button1.Text = "Resume";
+                _timer.Stop();
+            }                      
+        }
+        private void _timer_Tick(object sender, EventArgs e)
+        {
+            Nation winner = _ww3.WarStrike(this);
+            if (winner != null)
+            {
+                _timer.Stop();
+                Controls.Add(new Label { Location = winner.Coordinates, AutoSize = true, BackColor = Color.Black, ForeColor = Color.Green, Text = winner + "\nWINNER" });
+            }
         }
     }
 }
