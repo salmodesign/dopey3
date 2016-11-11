@@ -36,8 +36,9 @@ namespace DopeyWar
         {
             Nation winner = _ww3.WarStrike(this);
             if (winner != null)
-                MessageBox.Show("Winner : " + winner);
-            
+            {
+                Controls.Add(new Label { Location = winner.Coordinates, AutoSize = true, BackColor = Color.Black, ForeColor = Color.Green, Text = winner + "\nWINNER" });
+            }
         }
 
         public void DrawMissile(Nation attacker, Nation defender)
@@ -73,15 +74,8 @@ namespace DopeyWar
 
         public void DisplayDefeated(Nation defender)
         {
-<<<<<<< HEAD
-            //Label defetedLabel = new Label();
-            //defetedLabel.AutoSize = true;
-            //defetedLabel.Location = new Point(defender.Coordinates.X, defender.Coordinates.Y);
-            //defetedLabel.Text = defender.ToString().ToUpper() + " DEFEATED!";
-            //Controls.Add(defetedLabel); 
-=======
-            Controls.Add(new Label { Location = defender.Coordinates, AutoSize = true, BackColor = Color.Black, ForeColor = Color.Red, Text = "DEFEATED"}); 
->>>>>>> origin/master
+            Controls.Add(new Label { Location=defender.Coordinates, AutoSize=true, BackColor=Color.Black, ForeColor=Color.Red, Text = defender + "\nDEFEATED"}); 
+
         }
 
         private void MapForm_ResizeEnd(object sender, EventArgs e)
