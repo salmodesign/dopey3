@@ -15,6 +15,13 @@ namespace DopeyWar
         private War _ww3;
         private Size _originalFormSize;
 
+        protected override void OnMouseDoubleClick(MouseEventArgs e)
+        {
+            base.OnMouseDoubleClick(e);
+            int x = e.X; int y = e.Y;
+            MessageBox.Show("x: " + x.ToString() + " " + "y: " + y.ToString());
+        }
+
         public MapForm()
         {
             InitializeComponent();
@@ -66,11 +73,15 @@ namespace DopeyWar
 
         public void DisplayDefeated(Nation defender)
         {
+<<<<<<< HEAD
             //Label defetedLabel = new Label();
             //defetedLabel.AutoSize = true;
             //defetedLabel.Location = new Point(defender.Coordinates.X, defender.Coordinates.Y);
             //defetedLabel.Text = defender.ToString().ToUpper() + " DEFEATED!";
             //Controls.Add(defetedLabel); 
+=======
+            Controls.Add(new Label { Location = defender.Coordinates, AutoSize = true, BackColor = Color.Black, ForeColor = Color.Red, Text = "DEFEATED"}); 
+>>>>>>> origin/master
         }
 
         private void MapForm_ResizeEnd(object sender, EventArgs e)
