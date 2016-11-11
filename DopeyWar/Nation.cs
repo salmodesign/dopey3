@@ -11,9 +11,10 @@ namespace DopeyWar
     {
         private string _name;
         private int _endurance;
-        private Point _coordinates;
-        private int _scaleFactorX; //CE
-        private int _scaleFactorY; //CE
+        public Point Coordinates;
+
+        public static double _scaleFactorX; //CE
+        public static double _scaleFactorY; //CE
 
         public int Endurance
         {
@@ -23,15 +24,17 @@ namespace DopeyWar
             }
         }
 
-        public Point Coordinates
-        {
-            get
-            {
-                _coordinates.X *= _scaleFactorX; //CE
-                _coordinates.Y *= _scaleFactorY; //CE
-                return _coordinates;
-            }
-        }
+        //public Point Coordinates
+        //{
+        //    get
+        //    {   
+        //        return _coordinates;
+        //    }
+        //    set
+        //    {
+        //        _coordinates = value;
+        //    }
+        //}
 
 
         public Nation(string name, int endurance, int x, int y)
@@ -40,7 +43,7 @@ namespace DopeyWar
             _scaleFactorY = 1;
             _name = name;
             _endurance = endurance;
-            _coordinates = new Point(x, y);
+            Coordinates = new Point(x, y);
         }
 
         public override string ToString()
@@ -51,6 +54,12 @@ namespace DopeyWar
         public void MakeDamage()
         {
             _endurance--;
+        }
+
+        public static void SetNewScaleFactors(int xOrg, int xNew, int yOrg, int yNew)
+        {
+            _scaleFactorX = xNew / (double) xOrg;
+            _scaleFactorY = yNew / (double) yOrg;           
         }
 
         public int CompareTo(object obj)

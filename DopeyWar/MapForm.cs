@@ -13,7 +13,7 @@ namespace DopeyWar
     public partial class MapForm : Form
     {
         private War _ww3;
-        private Size _originalFormSize;
+        private Size _orgFormSize;
 
         protected override void OnMouseDoubleClick(MouseEventArgs e)
         {
@@ -29,7 +29,7 @@ namespace DopeyWar
             statsListView.Columns.Add("Nation");
             statsListView.Columns.Add("Endurance");
 
-            _originalFormSize = new Size(Size.Height, Size.Width); //Store the original form size
+            _orgFormSize = new Size(Size.Width, Size.Height); //Store the original form size
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -80,7 +80,8 @@ namespace DopeyWar
 
         private void MapForm_ResizeEnd(object sender, EventArgs e)
         {
-            //Logic for changing the factor of change in size
+            Nation.SetNewScaleFactors(_orgFormSize.Width, Size.Width, _orgFormSize.Height, Size.Height);
+            _ww3.AdjustCoordinatesToScale();
         }
     }
 }

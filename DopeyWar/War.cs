@@ -16,16 +16,16 @@ namespace DopeyWar
         {
             _nationList = new List<Nation>();
 
-            _nationList.Add(new Nation("Sweden", 3, 834, 138));
-            _nationList.Add(new Nation("USA", 3, 426, 235));
-            _nationList.Add(new Nation("Russia", 3, 929, 135 ));
-            _nationList.Add(new Nation("China", 3, 1281, 255));
-            _nationList.Add(new Nation("North Korea", 3, 1312, 231));
-            _nationList.Add(new Nation("South Africa", 3, 869, 520));
-            _nationList.Add(new Nation("Brazil", 3, 591, 454));
-            _nationList.Add(new Nation("Australia", 3, 1393, 557));
-            _nationList.Add(new Nation("United Kingdom", 3, 764, 169));
-            _nationList.Add(new Nation("Iraq", 3, 968, 249));
+            _nationList.Add(new Nation("Sweden", 3, 600, 100));
+            _nationList.Add(new Nation("USA", 3, 360, 200));
+            _nationList.Add(new Nation("Russia", 3, 750, 100));
+            _nationList.Add(new Nation("China", 3, 1000, 200));
+            _nationList.Add(new Nation("North Korea", 3, 1050, 185));
+            _nationList.Add(new Nation("South Africa", 3, 700, 400));
+            _nationList.Add(new Nation("Brazil", 3, 480, 370));
+            _nationList.Add(new Nation("Australia", 3, 1100, 440));
+            _nationList.Add(new Nation("United Kingdom", 3, 650, 120));
+            _nationList.Add(new Nation("Iraq", 3, 800, 160));
         }
 
         public Nation WarStrike(MapForm mf)
@@ -68,6 +68,15 @@ namespace DopeyWar
             if (counter == 1)   //ONE single winner!
                 return true;
             return false;
+        }
+
+        public void AdjustCoordinatesToScale ()
+        {
+            foreach (Nation n in _nationList)
+            {
+                n.Coordinates.X = (int)(n.Coordinates.X * Nation._scaleFactorX); //CE
+                n.Coordinates.Y = (int)(n.Coordinates.Y * Nation._scaleFactorY); //CE
+            }
         }
     }
 }
