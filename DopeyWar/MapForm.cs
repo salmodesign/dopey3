@@ -31,7 +31,7 @@ namespace DopeyWar
             _orgFormSize = new Size(Size.Width, Size.Height); //Store the original form size
 
             _timer = new Timer();
-            _timer.Interval = 1000;
+            _timer.Interval = 1500;
             _timer.Tick += _timer_Tick;
 
             _scaleIsSet = false;
@@ -45,8 +45,10 @@ namespace DopeyWar
             StartAndStop();
         }
 
-        public void DrawMissile(Nation attacker, Nation defender)
+        public void DisplayWarActivity(Nation attacker, Nation defender)
         {
+            ChangeActivityLabel(attacker, defender);
+
             Pen myPen;
             myPen = new Pen(Color.LightBlue, 3);
             Graphics formGraphics = this.CreateGraphics();
@@ -75,11 +77,15 @@ namespace DopeyWar
                 statsListView.Items.Add(new ListViewItem(rowItem));
             }
         }
+        private void ChangeActivityLabel (Nation attacker, Nation defender)
+        {
+            warActivityLabel.Text = attacker + " attacks " + defender;
+        }
 
         public void DisplayDefeated(Nation defender)
         {
-            Controls.Add(new Label { Location=defender.Coordinates, AutoSize=true, BackColor=Color.Black, ForeColor=Color.Red, Text = defender + "\nDEFEATED"}); 
-
+            Controls.Add(new Label { Location=defender.Coordinates, AutoSize=true, BackColor=Color.Black, ForeColor=Color.Red, Text = defender + "\nDEFEATED"});
+            warActivityLabel.Text += "\n" + defender + " defeated!";
         }
 
         private void MapForm_ResizeEnd(object sender, EventArgs e)
@@ -105,12 +111,12 @@ namespace DopeyWar
 
             if (_timer.Enabled == false)
             {
-                button1.Text = "Stop";
+                startAndStopButton.Text = "Stop";
                 _timer.Start();
             }
             else
             {
-                button1.Text = "Resume";
+                startAndStopButton.Text = "Resume";
                 _timer.Stop();
             }                      
         }

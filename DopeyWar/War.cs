@@ -31,7 +31,7 @@ namespace DopeyWar
         public Nation WarStrike(MapForm mf)
         {
             PickNations();        //sets attacker and defender
-            mf.DrawMissile(_attacker, _defender);
+            mf.DisplayWarActivity(_attacker, _defender);
             _defender.MakeDamage();
             _nationList.Sort();    
             mf.UpDateList(_nationList);
