@@ -16,21 +16,21 @@ namespace DopeyWar
         {
             _nationList = new List<Nation>();
 
-            _nationList.Add(new Nation("Sweden", 3, 600, 100));
-            _nationList.Add(new Nation("USA", 3, 360, 200));
-            _nationList.Add(new Nation("Russia", 3, 750, 100));
-            _nationList.Add(new Nation("China", 3, 1000, 200));
-            _nationList.Add(new Nation("North Korea", 3, 1050, 185));
-            _nationList.Add(new Nation("South Africa", 3, 700, 400));
-            _nationList.Add(new Nation("Brazil", 3, 480, 370));
-            _nationList.Add(new Nation("Australia", 3, 1100, 440));
-            _nationList.Add(new Nation("United Kingdom", 3, 650, 120));
-            _nationList.Add(new Nation("Iraq", 3, 800, 160));
+            _nationList.Add(new Nation("Sweden", 3, 551, 99));
+            _nationList.Add(new Nation("USA", 3, 242, 173));
+            _nationList.Add(new Nation("Russia", 3, 628, 99));
+            _nationList.Add(new Nation("China", 3, 830, 196));
+            _nationList.Add(new Nation("North Korea", 3, 866, 166));
+            _nationList.Add(new Nation("South Africa", 3, 572, 391));
+            _nationList.Add(new Nation("Brazil", 3, 382, 326));
+            _nationList.Add(new Nation("Australia", 3, 907, 387));
+            _nationList.Add(new Nation("United Kingdom", 3, 503, 122));
+            _nationList.Add(new Nation("Iraq", 3, 636, 175));
         }
 
         public Nation WarStrike(MapForm mf)
         {
-            Randomize();        //sets attacker and defender
+            PickNations();        //sets attacker and defender
             mf.DrawMissile(_attacker, _defender);
             _defender.MakeDamage();
             _nationList.Sort();    
@@ -45,15 +45,15 @@ namespace DopeyWar
             return null;
         }
 
-        private void Randomize()
+        private void PickNations()
         {
             Random rno = new Random(Guid.NewGuid().GetHashCode());
             _attacker = _nationList[rno.Next(0, 10)];
             _defender = _nationList[rno.Next(0, 10)];
             if (_attacker == _defender)
-                Randomize();
+                PickNations();
             if (_attacker.Endurance == 0 || _defender.Endurance == 0)
-                Randomize();
+                PickNations();
         }
 
         private bool CheckIfWinner()

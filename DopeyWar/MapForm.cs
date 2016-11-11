@@ -13,14 +13,13 @@ namespace DopeyWar
     public partial class MapForm : Form
     {
         private War _ww3;
+
         private Size _orgFormSize;
 
-        protected override void OnMouseDoubleClick(MouseEventArgs e)
-        {
-            base.OnMouseDoubleClick(e);
-            int x = e.X; int y = e.Y;
-            MessageBox.Show("x: " + x.ToString() + " " + "y: " + y.ToString());
-        }
+        private Timer _timer;
+
+        private bool _scaleIsSet;
+        
 
         public MapForm()
         {
@@ -30,15 +29,20 @@ namespace DopeyWar
             statsListView.Columns.Add("Endurance");
 
             _orgFormSize = new Size(Size.Width, Size.Height); //Store the original form size
+
+            _timer = new Timer();
+            _timer.Interval = 1000;
+            _timer.Tick += _timer_Tick;
+
+            _scaleIsSet = false;
+
         }
+
+        
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Nation winner = _ww3.WarStrike(this);
-            if (winner != null)
-            {
-                Controls.Add(new Label { Location = winner.Coordinates, AutoSize = true, BackColor = Color.Black, ForeColor = Color.Green, Text = winner + "\nWINNER" });
-            }
+            StartAndStop();
         }
 
         public void DrawMissile(Nation attacker, Nation defender)
@@ -80,8 +84,44 @@ namespace DopeyWar
 
         private void MapForm_ResizeEnd(object sender, EventArgs e)
         {
-            Nation.SetNewScaleFactors(_orgFormSize.Width, Size.Width, _orgFormSize.Height, Size.Height);
-            _ww3.AdjustCoordinatesToScale();
+
+        }
+
+        protected override void OnMouseDoubleClick(MouseEventArgs e)
+        {
+            base.OnMouseDoubleClick(e);
+            int x = e.X; int y = e.Y;
+            MessageBox.Show("x: " + x.ToString() + " " + "y: " + y.ToString());
+        }
+
+        public void StartAndStop()
+        {
+            if (!_scaleIsSet)
+            {
+                Nation.SetNewScaleFactors(_orgFormSize.Width, Size.Width, _orgFormSize.Height, Size.Height);
+                _ww3.AdjustCoordinatesToScale();
+                _scaleIsSet = true;
+            }
+
+            if (_timer.Enabled == false)
+            {
+                button1.Text = "Stop";
+                _timer.Start();
+            }
+            else
+            {
+                button1.Text = "Resume";
+                _timer.Stop();
+            }                      
+        }
+        private void _timer_Tick(object sender, EventArgs e)
+        {
+            Nation winner = _ww3.WarStrike(this);
+            if (winner != null)
+            {
+                _timer.Stop();
+                Controls.Add(new Label { Location = winner.Coordinates, AutoSize = true, BackColor = Color.Black, ForeColor = Color.Green, Text = winner + "\nWINNER" });
+            }
         }
     }
 }
