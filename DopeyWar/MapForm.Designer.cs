@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.button1 = new System.Windows.Forms.Button();
-            this.mapPanel = new System.Windows.Forms.Panel();
             this.statsListView = new System.Windows.Forms.ListView();
             this.SuspendLayout();
             // 
@@ -43,15 +42,6 @@
             this.button1.Text = "Start war";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // mapPanel
-            // 
-            this.mapPanel.BackgroundImage = global::DopeyWar.Properties.Resources.worldmap;
-            this.mapPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.mapPanel.Location = new System.Drawing.Point(771, 485);
-            this.mapPanel.Name = "mapPanel";
-            this.mapPanel.Size = new System.Drawing.Size(160, 79);
-            this.mapPanel.TabIndex = 1;
             // 
             // statsListView
             // 
@@ -73,11 +63,11 @@
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1014, 585);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.mapPanel);
             this.Controls.Add(this.statsListView);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "MapForm";
             this.Text = "Form1";
+            this.ResizeEnd += new System.EventHandler(this.MapForm_ResizeEnd);
             this.ResumeLayout(false);
 
         }
@@ -85,7 +75,6 @@
         #endregion
 
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Panel mapPanel;
         private System.Windows.Forms.ListView statsListView;
     }
 }

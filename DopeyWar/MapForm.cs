@@ -13,6 +13,7 @@ namespace DopeyWar
     public partial class MapForm : Form
     {
         private War _ww3;
+        private Size _originalFormSize;
 
         public MapForm()
         {
@@ -20,6 +21,8 @@ namespace DopeyWar
             _ww3 = new War();
             statsListView.Columns.Add("Nation");
             statsListView.Columns.Add("Endurance");
+
+            _originalFormSize = new Size(Size.Height, Size.Width); //Store the original form size
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -63,8 +66,16 @@ namespace DopeyWar
 
         public void DisplayDefeated(Nation defender)
         {
-            
+            //Label defetedLabel = new Label();
+            //defetedLabel.AutoSize = true;
+            //defetedLabel.Location = new Point(defender.Coordinates.X, defender.Coordinates.Y);
+            //defetedLabel.Text = defender.ToString().ToUpper() + " DEFEATED!";
+            //Controls.Add(defetedLabel); 
         }
 
+        private void MapForm_ResizeEnd(object sender, EventArgs e)
+        {
+            //Logic for changing the factor of change in size
+        }
     }
 }

@@ -12,6 +12,8 @@ namespace DopeyWar
         private string _name;
         private int _endurance;
         private Point _coordinates;
+        private int _scaleFactorX; //CE
+        private int _scaleFactorY; //CE
 
         public int Endurance
         {
@@ -25,6 +27,8 @@ namespace DopeyWar
         {
             get
             {
+                _coordinates.X *= _scaleFactorX; //CE
+                _coordinates.Y *= _scaleFactorY; //CE
                 return _coordinates;
             }
         }
@@ -32,6 +36,8 @@ namespace DopeyWar
 
         public Nation(string name, int endurance, int x, int y)
         {
+            _scaleFactorX = 1;
+            _scaleFactorY = 1;
             _name = name;
             _endurance = endurance;
             _coordinates = new Point(x, y);
