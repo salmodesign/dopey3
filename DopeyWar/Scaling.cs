@@ -9,6 +9,7 @@ namespace DopeyWar
     public abstract class Scaling
     {
         static private List<IScaleable> _scaleableObjects = new List<IScaleable>();
+        
 
         /// <summary>
         /// Adds the object so that scaling factors can be applied.
