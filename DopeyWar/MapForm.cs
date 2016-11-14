@@ -117,7 +117,7 @@ namespace DopeyWar
             if (!_scaleIsSet)
             {
                 Scaling.ApplyUserScaling(_orgFormSize.Width, Size.Width, _orgFormSize.Height, Size.Height);
-                
+                DisableFormResizing();
                 _scaleIsSet = true;
             }
             if (_timer.Enabled == false)
@@ -151,6 +151,7 @@ namespace DopeyWar
             }  
         }
 
+
         private void startGroupBox_Enter(object sender, EventArgs e)
         {
             
@@ -172,6 +173,13 @@ namespace DopeyWar
         {
             startGroupBox.Visible = false;
             startAndStopButton.Enabled = true;
+        }
+        private void DisableFormResizing()
+        {
+            MaximizeBox = false;
+            MinimizeBox = false;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+
         }
     }
 }
