@@ -35,13 +35,12 @@
             this.startGroupBox = new System.Windows.Forms.GroupBox();
             this.oKButton = new System.Windows.Forms.Button();
             this.yesButton = new System.Windows.Forms.Button();
-<<<<<<< HEAD
-=======
+
             this.columnNation = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnEndurance = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnKills = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnShots = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
->>>>>>> origin/master
+
             this.startGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -67,12 +66,12 @@
             this.columnShots,
             this.columnKills});
             this.statsListView.Enabled = false;
-<<<<<<< HEAD
+
             this.statsListView.Location = new System.Drawing.Point(16, 206);
             this.statsListView.Margin = new System.Windows.Forms.Padding(4);
-=======
+
             this.statsListView.Location = new System.Drawing.Point(12, 269);
->>>>>>> origin/master
+
             this.statsListView.Name = "statsListView";
             this.statsListView.Size = new System.Drawing.Size(235, 264);
             this.statsListView.TabIndex = 1;
@@ -97,12 +96,12 @@
             this.startGroupBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.startGroupBox.Controls.Add(this.oKButton);
             this.startGroupBox.Controls.Add(this.yesButton);
-<<<<<<< HEAD
+
             this.startGroupBox.Location = new System.Drawing.Point(477, 138);
-=======
+
             this.startGroupBox.Location = new System.Drawing.Point(339, 61);
             this.startGroupBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
->>>>>>> origin/master
+
             this.startGroupBox.Name = "startGroupBox";
             this.startGroupBox.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.startGroupBox.Size = new System.Drawing.Size(395, 298);
@@ -111,8 +110,7 @@
             this.startGroupBox.Enter += new System.EventHandler(this.startGroupBox_Enter);
             // 
             // oKButton
-<<<<<<< HEAD
-=======
+
             // 
             this.oKButton.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.oKButton.FlatAppearance.BorderColor = System.Drawing.Color.LightGray;
@@ -143,7 +141,7 @@
             this.yesButton.Click += new System.EventHandler(this.yesButton_Click);
             // 
             // columnNation
->>>>>>> origin/master
+
             // 
             this.columnNation.Text = "Nation";
             this.columnNation.Width = 84;
