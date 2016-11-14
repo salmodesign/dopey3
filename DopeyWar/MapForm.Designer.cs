@@ -33,8 +33,8 @@
             this.statsListView = new System.Windows.Forms.ListView();
             this.warActivityLabel = new System.Windows.Forms.Label();
             this.startGroupBox = new System.Windows.Forms.GroupBox();
-            this.yesButton = new System.Windows.Forms.Button();
             this.oKButton = new System.Windows.Forms.Button();
+            this.yesButton = new System.Windows.Forms.Button();
             this.startGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -56,7 +56,7 @@
             this.statsListView.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
             this.statsListView.Enabled = false;
             this.statsListView.Location = new System.Drawing.Point(16, 206);
-            this.statsListView.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.statsListView.Margin = new System.Windows.Forms.Padding(4);
             this.statsListView.Name = "statsListView";
             this.statsListView.Size = new System.Drawing.Size(204, 408);
             this.statsListView.TabIndex = 1;
@@ -82,26 +82,12 @@
             this.startGroupBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.startGroupBox.Controls.Add(this.oKButton);
             this.startGroupBox.Controls.Add(this.yesButton);
-            this.startGroupBox.Location = new System.Drawing.Point(452, 75);
+            this.startGroupBox.Location = new System.Drawing.Point(477, 138);
             this.startGroupBox.Name = "startGroupBox";
             this.startGroupBox.Size = new System.Drawing.Size(527, 367);
             this.startGroupBox.TabIndex = 3;
             this.startGroupBox.TabStop = false;
             this.startGroupBox.Enter += new System.EventHandler(this.startGroupBox_Enter);
-            // 
-            // yesButton
-            // 
-            this.yesButton.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.yesButton.FlatAppearance.BorderColor = System.Drawing.Color.LightGray;
-            this.yesButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.yesButton.ForeColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.yesButton.Location = new System.Drawing.Point(138, 302);
-            this.yesButton.Name = "yesButton";
-            this.yesButton.Size = new System.Drawing.Size(75, 35);
-            this.yesButton.TabIndex = 0;
-            this.yesButton.Text = "YES";
-            this.yesButton.UseVisualStyleBackColor = false;
-            this.yesButton.Click += new System.EventHandler(this.yesButton_Click);
             // 
             // oKButton
             // 
@@ -116,6 +102,20 @@
             this.oKButton.Text = "OK";
             this.oKButton.UseVisualStyleBackColor = false;
             this.oKButton.Click += new System.EventHandler(this.oKButton_Click);
+            // 
+            // yesButton
+            // 
+            this.yesButton.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.yesButton.FlatAppearance.BorderColor = System.Drawing.Color.LightGray;
+            this.yesButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.yesButton.ForeColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.yesButton.Location = new System.Drawing.Point(138, 302);
+            this.yesButton.Name = "yesButton";
+            this.yesButton.Size = new System.Drawing.Size(75, 35);
+            this.yesButton.TabIndex = 0;
+            this.yesButton.Text = "YES";
+            this.yesButton.UseVisualStyleBackColor = false;
+            this.yesButton.Click += new System.EventHandler(this.yesButton_Click);
             // 
             // MapForm
             // 

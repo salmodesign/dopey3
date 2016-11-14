@@ -32,7 +32,7 @@ namespace DopeyWar
             statsListView.Columns.Add("Endurance");
 
             _timer = new Timer();
-            _timer.Interval = 1500;
+            _timer.Interval = 100;
             _timer.Tick += _timer_Tick;
 
             _scaleIsSet = false;
@@ -148,6 +148,23 @@ namespace DopeyWar
                 Nation winner = _ww3.Attacker;
                 Point winnerPoint = new Point(winner.PositionX, winner.PositionY);
                 Controls.Add(new Label { Location = winnerPoint, AutoSize = true, BackColor = Color.Black, ForeColor = Color.Green, Text = winner + "\nWINNER" });
+
+                //string name = winner.ToString() + ".jpg";
+                PictureBox pb = new PictureBox()
+                {
+
+                    Location = winnerPoint,
+                    Visible = true,
+                    //Size = new Size(100,100);
+
+                };
+                pb.Image = Properties.Resources.North_Korea;
+                pb.SizeMode = PictureBoxSizeMode.StretchImage;
+
+                //pb.Image = Bitmap.FromFile(@"worldmap.jpg");
+                //pb.Dock = DockStyle.Fill;
+                //Location = winnerPoint;
+                Controls.Add(pb);
             }  
         }
 
@@ -181,5 +198,7 @@ namespace DopeyWar
             FormBorderStyle = FormBorderStyle.FixedSingle;
 
         }
+
+        
     }
 }

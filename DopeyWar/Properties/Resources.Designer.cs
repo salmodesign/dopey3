@@ -63,6 +63,16 @@ namespace DopeyWar.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap North_Korea {
+            get {
+                object obj = ResourceManager.GetObject("North Korea", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap worldmap {
             get {
                 object obj = ResourceManager.GetObject("worldmap", resourceCulture);

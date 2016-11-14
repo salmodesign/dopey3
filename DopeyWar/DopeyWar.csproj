@@ -87,6 +87,10 @@
   <ItemGroup>
     <None Include="Resources\worldmap.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\North Korea.gif" />
+    <None Include="Resources\North Korea1.gif" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
