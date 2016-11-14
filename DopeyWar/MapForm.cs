@@ -32,11 +32,11 @@ namespace DopeyWar
             //statsListView.Columns.Add("Endurance", 50);
 
             _timer = new Timer();
-<<<<<<< HEAD
+
             _timer.Interval = 100;
-=======
+
             _timer.Interval = 200;
->>>>>>> origin/master
+
             _timer.Tick += _timer_Tick;
 
             _scaleIsSet = false;
