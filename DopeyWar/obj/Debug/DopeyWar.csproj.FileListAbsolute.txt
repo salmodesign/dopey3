@@ -8,3 +8,12 @@ C:\Users\java\Documents\GitHub\dopey3\DopeyWar\obj\Debug\DopeyWar.csproj.Generat
 C:\Users\java\Documents\GitHub\dopey3\DopeyWar\obj\Debug\DopeyWar.exe
 C:\Users\java\Documents\GitHub\dopey3\DopeyWar\obj\Debug\DopeyWar.pdb
 C:\Users\java\Documents\GitHub\dopey3\DopeyWar\obj\Debug\DopeyWar.MapForm.resources
+C:\Users\java\Documents\GitHub\dopey3 IScaleable\DopeyWar\bin\Debug\DopeyWar.exe.config
+C:\Users\java\Documents\GitHub\dopey3 IScaleable\DopeyWar\obj\Debug\DopeyWar.exe
+C:\Users\java\Documents\GitHub\dopey3 IScaleable\DopeyWar\obj\Debug\DopeyWar.pdb
+C:\Users\java\Documents\GitHub\dopey3 IScaleable\DopeyWar\bin\Debug\DopeyWar.exe
+C:\Users\java\Documents\GitHub\dopey3 IScaleable\DopeyWar\bin\Debug\DopeyWar.pdb
+C:\Users\java\Documents\GitHub\dopey3 IScaleable\DopeyWar\obj\Debug\DopeyWar.csprojResolveAssemblyReference.cache
+C:\Users\java\Documents\GitHub\dopey3 IScaleable\DopeyWar\obj\Debug\DopeyWar.MapForm.resources
+C:\Users\java\Documents\GitHub\dopey3 IScaleable\DopeyWar\obj\Debug\DopeyWar.Properties.Resources.resources
+C:\Users\java\Documents\GitHub\dopey3 IScaleable\DopeyWar\obj\Debug\DopeyWar.csproj.GenerateResource.Cache

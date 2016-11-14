@@ -3,18 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Drawing;
 
 namespace DopeyWar
 {
-    public class Nation : IComparable
+    public class Nation : IComparable, IScaleable
     {
         private string _name;
         private int _endurance;
-        public Point Coordinates;
 
-        public static double _scaleFactorX; //CE
-        public static double _scaleFactorY; //CE
+        public int PositionX { get; set; }
+        public int PositionY { get; set; }
 
         public int Endurance
         {
@@ -24,26 +22,15 @@ namespace DopeyWar
             }
         }
 
-        //public Point Coordinates
-        //{
-        //    get
-        //    {   
-        //        return _coordinates;
-        //    }
-        //    set
-        //    {
-        //        _coordinates = value;
-        //    }
-        //}
-
-
         public Nation(string name, int endurance, int x, int y)
         {
-            _scaleFactorX = 1;
-            _scaleFactorY = 1;
             _name = name;
             _endurance = endurance;
-            Coordinates = new Point(x, y);
+
+            PositionX = x;
+            PositionY = y;
+
+            Scaling.Add(this);
         }
 
         public override string ToString()
@@ -54,12 +41,6 @@ namespace DopeyWar
         public void MakeDamage()
         {
             _endurance--;
-        }
-
-        public static void SetNewScaleFactors(int xOrg, int xNew, int yOrg, int yNew)
-        {
-            _scaleFactorX = xNew / (double) xOrg;
-            _scaleFactorY = yNew / (double) yOrg;           
         }
 
         public int CompareTo(object obj)

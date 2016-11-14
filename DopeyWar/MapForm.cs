@@ -19,16 +19,17 @@ namespace DopeyWar
         private Timer _timer;
 
         private bool _scaleIsSet;
-        
+      
 
         public MapForm()
         {
             InitializeComponent();
+
+            _orgFormSize = new Size(Size.Width, Size.Height); //Store the original form size
+
             _ww3 = new War();
             statsListView.Columns.Add("Nation");
             statsListView.Columns.Add("Endurance");
-
-            _orgFormSize = new Size(Size.Width, Size.Height); //Store the original form size
 
             _timer = new Timer();
             _timer.Interval = 1500;
@@ -50,18 +51,28 @@ namespace DopeyWar
             ChangeActivityLabel(attacker, defender);
 
             Pen myPen;
-            myPen = new Pen(Color.LightBlue, 3);
-            Graphics formGraphics = this.CreateGraphics();
+            
+            Graphics formGraphics = CreateGraphics();
 
-            int x = attacker.Coordinates.X + (defender.Coordinates.X - attacker.Coordinates.X) / 2;
-            int y = attacker.Coordinates.Y + (defender.Coordinates.Y - attacker.Coordinates.Y) / 2;
+            int x = attacker.PositionX + (defender.PositionX - attacker.PositionX) / 2;
+            int y = attacker.PositionY + (defender.PositionY - attacker.PositionY) / 2;
 
             Random rno = new Random(Guid.NewGuid().GetHashCode());
 
-            Point midPoint = new Point(x, y - rno.Next(10,100));
-            Point hittedRandTarget = new Point(defender.Coordinates.X + rno.Next(-20, 20), defender.Coordinates.Y + rno.Next(-20, 20));
-            Point[] points = new Point[3] { attacker.Coordinates, midPoint, hittedRandTarget};
+            Point startPoint = new Point(attacker.PositionX, attacker.PositionY);
+            Point midPoint = new Point(x - rno.Next(5,50), y - rno.Next(10,100));
+            Point hittedRandTarget = new Point(defender.PositionX + rno.Next(-20, 20), defender.PositionY + rno.Next(-20, 20));
+            Point[] points = new Point[3] { startPoint, midPoint, hittedRandTarget};
+            formGraphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality; //Added for extra quality!
+            
+            myPen = new Pen(Color.OrangeRed, 2);
+            formGraphics.DrawEllipse(myPen, hittedRandTarget.X - 5, hittedRandTarget.Y-3, 10, 6);
+            myPen = new Pen(Color.Yellow, 1);
+            formGraphics.DrawEllipse(myPen, hittedRandTarget.X - 10, hittedRandTarget.Y - 6, 20, 12);
+
+            myPen = new Pen(Color.LightBlue, 3);
             formGraphics.DrawCurve(myPen, points);
+
             formGraphics.Dispose();
         }
 
@@ -84,7 +95,8 @@ namespace DopeyWar
 
         public void DisplayDefeated(Nation defender)
         {
-            Controls.Add(new Label { Location=defender.Coordinates, AutoSize=true, BackColor=Color.Black, ForeColor=Color.Red, Text = defender + "\nDEFEATED"});
+            Point defenderPoint = new Point(defender.PositionX, defender.PositionY);
+            Controls.Add(new Label { Location=defenderPoint, AutoSize=true, BackColor=Color.Black, ForeColor=Color.Red, Text = defender + "\nDEFEATED"});
             warActivityLabel.Text += "\n" + defender + " defeated!";
         }
 
@@ -104,11 +116,10 @@ namespace DopeyWar
         {
             if (!_scaleIsSet)
             {
-                Nation.SetNewScaleFactors(_orgFormSize.Width, Size.Width, _orgFormSize.Height, Size.Height);
-                _ww3.AdjustCoordinatesToScale();
+                Scaling.ApplyUserScaling(_orgFormSize.Width, Size.Width, _orgFormSize.Height, Size.Height);
+                
                 _scaleIsSet = true;
             }
-
             if (_timer.Enabled == false)
             {
                 startAndStopButton.Text = "Stop";
@@ -122,12 +133,21 @@ namespace DopeyWar
         }
         private void _timer_Tick(object sender, EventArgs e)
         {
-            Nation winner = _ww3.WarStrike(this);
-            if (winner != null)
+            _ww3.PickNations();
+            DisplayWarActivity(_ww3.Attacker, _ww3.Defender);
+            _ww3.Defender.MakeDamage();
+            UpDateList(_ww3.GetSortedList());
+
+            if (_ww3.Defender.Endurance == 0)
+                DisplayDefeated(_ww3.Defender);
+
+            if (_ww3.CheckIfWinner())
             {
                 _timer.Stop();
-                Controls.Add(new Label { Location = winner.Coordinates, AutoSize = true, BackColor = Color.Black, ForeColor = Color.Green, Text = winner + "\nWINNER" });
-            }
+                Nation winner = _ww3.Attacker;
+                Point winnerPoint = new Point(winner.PositionX, winner.PositionY);
+                Controls.Add(new Label { Location = winnerPoint, AutoSize = true, BackColor = Color.Black, ForeColor = Color.Green, Text = winner + "\nWINNER" });
+            }  
         }
     }
 }

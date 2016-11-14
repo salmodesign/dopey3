@@ -12,6 +12,9 @@ namespace DopeyWar
         private Nation _defender;
         private List<Nation> _nationList;
 
+        public Nation Attacker { get { return _attacker; } }
+        public Nation Defender { get { return _defender; } }
+
         public War()
         {
             _nationList = new List<Nation>();
@@ -28,24 +31,13 @@ namespace DopeyWar
             _nationList.Add(new Nation("Iraq", 3, 636, 175));
         }
 
-        public Nation WarStrike(MapForm mf)
+        public List<Nation> GetSortedList()
         {
-            PickNations();        //sets attacker and defender
-            mf.DisplayWarActivity(_attacker, _defender);
-            _defender.MakeDamage();
-            _nationList.Sort();    
-            mf.UpDateList(_nationList);
-
-            if (_defender.Endurance == 0)
-                mf.DisplayDefeated(_defender);
-
-            if (CheckIfWinner())
-                return _attacker;
-
-            return null;
+            _nationList.Sort();
+            return _nationList;
         }
 
-        private void PickNations()
+        public void PickNations()
         {
             Random rno = new Random(Guid.NewGuid().GetHashCode());
             _attacker = _nationList[rno.Next(0, 10)];
@@ -56,7 +48,7 @@ namespace DopeyWar
                 PickNations();
         }
 
-        private bool CheckIfWinner()
+        public bool CheckIfWinner()
         {
             int counter = 0;
             foreach (var n in _nationList)
@@ -68,15 +60,6 @@ namespace DopeyWar
             if (counter == 1)   //ONE single winner!
                 return true;
             return false;
-        }
-
-        public void AdjustCoordinatesToScale ()
-        {
-            foreach (Nation n in _nationList)
-            {
-                n.Coordinates.X = (int)(n.Coordinates.X * Nation._scaleFactorX); //CE
-                n.Coordinates.Y = (int)(n.Coordinates.Y * Nation._scaleFactorY); //CE
-            }
         }
     }
 }
