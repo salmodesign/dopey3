@@ -82,10 +82,11 @@ namespace DopeyWar
 
             foreach (Nation n in ListToShow)
             {
-                string [] rowItem = new string[3];
+                string [] rowItem = new string[4];
                 rowItem[0] = n.ToString();
                 rowItem[1] = n.Endurance.ToString();
                 rowItem[2] = n.Shots.ToString();
+                rowItem[3] = n.Kills.ToString();
                 statsListView.Items.Add(new ListViewItem(rowItem));
             }
         }
@@ -179,7 +180,6 @@ namespace DopeyWar
             MaximizeBox = false;
             MinimizeBox = false;
             FormBorderStyle = FormBorderStyle.FixedSingle;
-
         }
     }
 }
