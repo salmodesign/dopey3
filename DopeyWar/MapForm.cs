@@ -28,11 +28,15 @@ namespace DopeyWar
             _orgFormSize = new Size(Size.Width, Size.Height); //Store the original form size
 
             _ww3 = new War();
-            statsListView.Columns.Add("Nation");
-            statsListView.Columns.Add("Endurance");
+            //statsListView.Columns.Add("Nation", 85);
+            //statsListView.Columns.Add("Endurance", 50);
 
             _timer = new Timer();
+<<<<<<< HEAD
             _timer.Interval = 100;
+=======
+            _timer.Interval = 200;
+>>>>>>> origin/master
             _timer.Tick += _timer_Tick;
 
             _scaleIsSet = false;
@@ -82,9 +86,11 @@ namespace DopeyWar
 
             foreach (Nation n in ListToShow)
             {
-                string [] rowItem = new string[2];
+                string [] rowItem = new string[4];
                 rowItem[0] = n.ToString();
                 rowItem[1] = n.Endurance.ToString();
+                rowItem[2] = n.Shots.ToString();
+                rowItem[3] = n.Kills.ToString();
                 statsListView.Items.Add(new ListViewItem(rowItem));
             }
         }
@@ -133,9 +139,8 @@ namespace DopeyWar
         }
         private void _timer_Tick(object sender, EventArgs e)
         {
-            _ww3.PickNations();
+            _ww3.CreateAttack();
             DisplayWarActivity(_ww3.Attacker, _ww3.Defender);
-            _ww3.Defender.MakeDamage();
             UpDateList(_ww3.GetSortedList());
 
             if (_ww3.Defender.Endurance == 0)
@@ -196,7 +201,6 @@ namespace DopeyWar
             MaximizeBox = false;
             MinimizeBox = false;
             FormBorderStyle = FormBorderStyle.FixedSingle;
-
         }
 
         

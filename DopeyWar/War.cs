@@ -37,15 +37,21 @@ namespace DopeyWar
             return _nationList;
         }
 
-        public void PickNations()
+        public void CreateAttack()
         {
             Random rno = new Random(Guid.NewGuid().GetHashCode());
             _attacker = _nationList[rno.Next(0, 10)];
             _defender = _nationList[rno.Next(0, 10)];
-            if (_attacker == _defender)
-                PickNations();
-            if (_attacker.Endurance == 0 || _defender.Endurance == 0)
-                PickNations();
+
+            if (_attacker == _defender || _attacker.Endurance == 0 || _defender.Endurance == 0)
+                CreateAttack();
+            else
+            {
+                _attacker.FireShot();
+                _defender.MakeDamage();
+                if (_defender.Endurance == 0)
+                    _attacker.EnemyKilled();
+            }
         }
 
         public bool CheckIfWinner()
@@ -57,7 +63,7 @@ namespace DopeyWar
                     counter++;
             }
                 
-            if (counter == 1)   //ONE single winner!
+            if (counter == 1)           //ONE single winner!
                 return true;
             return false;
         }
