@@ -10,6 +10,8 @@ namespace DopeyWar
     {
         private string _name;
         private int _endurance;
+        private int _shots;
+        private int _kills;
 
         public int PositionX { get; set; }
         public int PositionY { get; set; }
@@ -22,10 +24,28 @@ namespace DopeyWar
             }
         }
 
+        public int Shots
+        {
+            get
+            {
+                return _shots;
+            }
+        }
+
+        public int Kills
+        {
+            get
+            {
+                return _kills;
+            }
+        }
+
         public Nation(string name, int endurance, int x, int y)
         {
             _name = name;
             _endurance = endurance;
+            _shots = 0;
+            _kills = 0;
 
             PositionX = x;
             PositionY = y;
@@ -41,6 +61,16 @@ namespace DopeyWar
         public void MakeDamage()
         {
             _endurance--;
+        }
+
+        public void FireShot()
+        {
+            _shots++;
+        }
+
+        public void EnemyKilled()
+        {
+            _kills++;
         }
 
         public int CompareTo(object obj)

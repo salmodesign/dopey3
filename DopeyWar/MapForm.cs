@@ -28,11 +28,11 @@ namespace DopeyWar
             _orgFormSize = new Size(Size.Width, Size.Height); //Store the original form size
 
             _ww3 = new War();
-            statsListView.Columns.Add("Nation");
-            statsListView.Columns.Add("Endurance");
+            //statsListView.Columns.Add("Nation", 85);
+            //statsListView.Columns.Add("Endurance", 50);
 
             _timer = new Timer();
-            _timer.Interval = 1500;
+            _timer.Interval = 200;
             _timer.Tick += _timer_Tick;
 
             _scaleIsSet = false;
@@ -82,9 +82,10 @@ namespace DopeyWar
 
             foreach (Nation n in ListToShow)
             {
-                string [] rowItem = new string[2];
+                string [] rowItem = new string[3];
                 rowItem[0] = n.ToString();
                 rowItem[1] = n.Endurance.ToString();
+                rowItem[2] = n.Shots.ToString();
                 statsListView.Items.Add(new ListViewItem(rowItem));
             }
         }
