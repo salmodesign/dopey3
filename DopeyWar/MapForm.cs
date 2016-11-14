@@ -134,9 +134,8 @@ namespace DopeyWar
         }
         private void _timer_Tick(object sender, EventArgs e)
         {
-            _ww3.PickNations();
+            _ww3.CreateAttack();
             DisplayWarActivity(_ww3.Attacker, _ww3.Defender);
-            _ww3.Defender.MakeDamage();
             UpDateList(_ww3.GetSortedList());
 
             if (_ww3.Defender.Endurance == 0)
