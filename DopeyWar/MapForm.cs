@@ -144,10 +144,34 @@ namespace DopeyWar
             if (_ww3.CheckIfWinner())
             {
                 _timer.Stop();
+                startAndStopButton.Enabled = false;
                 Nation winner = _ww3.Attacker;
                 Point winnerPoint = new Point(winner.PositionX, winner.PositionY);
                 Controls.Add(new Label { Location = winnerPoint, AutoSize = true, BackColor = Color.Black, ForeColor = Color.Green, Text = winner + "\nWINNER" });
             }  
+        }
+
+        private void startGroupBox_Enter(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void MapForm_ClientSizeChanged(object sender, EventArgs e)
+        {
+            startGroupBox.Left = (this.ClientSize.Width - startGroupBox.Width) / 2;
+            startGroupBox.Top = (this.ClientSize.Height - startGroupBox.Height) / 2;
+        }
+
+        private void yesButton_Click(object sender, EventArgs e)
+        {
+            startGroupBox.Visible = false;
+            startAndStopButton.Enabled = true;
+        }
+
+        private void oKButton_Click(object sender, EventArgs e)
+        {
+            startGroupBox.Visible = false;
+            startAndStopButton.Enabled = true;
         }
     }
 }
