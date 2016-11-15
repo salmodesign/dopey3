@@ -23,6 +23,8 @@ namespace DopeyWar
 
         private bool _programIsfinished = false;
 
+        private int _endurance = 3;
+
         private SoundPlayer _anthemSound;
       
 
@@ -32,7 +34,7 @@ namespace DopeyWar
 
             _orgFormSize = new Size(Size.Width, Size.Height); //Store the original form size
 
-            _ww3 = new War();
+            
             //statsListView.Columns.Add("Nation", 85);
             //statsListView.Columns.Add("Endurance", 50);
 
@@ -50,6 +52,7 @@ namespace DopeyWar
 
         private void button1_Click(object sender, EventArgs e)
         {
+            _ww3 = new War(_endurance);
             StartAndStop();
         }
 
@@ -174,10 +177,10 @@ namespace DopeyWar
             startGroupBox.Top = (this.ClientSize.Height - startGroupBox.Height) / 2;
         }
 
-        private void yesButton_Click(object sender, EventArgs e)
+        private void plusButton_Click(object sender, EventArgs e)
         {
-            startGroupBox.Visible = false;
-            startAndStopButton.Enabled = true;
+            _endurance++;
+            showEnduranceLabel.Text = _endurance.ToString();
         }
 
         private void oKButton_Click(object sender, EventArgs e)
@@ -192,6 +195,13 @@ namespace DopeyWar
             FormBorderStyle = FormBorderStyle.FixedSingle;
         }
 
-        
+        private void minusButton_Click(object sender, EventArgs e)
+        {
+            if (_endurance > 1)
+            {
+                _endurance--;
+                showEnduranceLabel.Text = _endurance.ToString();
+            }
+        }
     }
 }

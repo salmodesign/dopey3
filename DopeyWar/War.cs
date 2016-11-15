@@ -15,20 +15,20 @@ namespace DopeyWar
         public Nation Attacker { get { return _attacker; } }
         public Nation Defender { get { return _defender; } }
 
-        public War()
+        public War(int endurance)
         {
             _nationList = new List<Nation>();
 
-            _nationList.Add(new Nation("Sweden", 3, 551, 99));
-            _nationList.Add(new Nation("USA", 3, 242, 173));
-            _nationList.Add(new Nation("Russia", 3, 628, 99));
-            _nationList.Add(new Nation("China", 3, 830, 196));
-            _nationList.Add(new Nation("North Korea", 3, 866, 166));
-            _nationList.Add(new Nation("South Africa", 3, 572, 391));
-            _nationList.Add(new Nation("Brazil", 3, 382, 326));
-            _nationList.Add(new Nation("Australia", 3, 907, 387));
-            _nationList.Add(new Nation("United Kingdom", 3, 503, 122));
-            _nationList.Add(new Nation("Iraq", 3, 636, 175));
+            _nationList.Add(new Nation("Sweden", endurance, 551, 99));
+            _nationList.Add(new Nation("USA", endurance, 242, 173));
+            _nationList.Add(new Nation("Russia", endurance, 628, 99));
+            _nationList.Add(new Nation("China", endurance, 830, 196));
+            _nationList.Add(new Nation("North Korea", endurance, 866, 166));
+            _nationList.Add(new Nation("South Africa", endurance, 572, 391));
+            _nationList.Add(new Nation("Brazil", endurance, 382, 326));
+            _nationList.Add(new Nation("Australia", endurance, 907, 387));
+            _nationList.Add(new Nation("United Kingdom", endurance, 503, 122));
+            _nationList.Add(new Nation("Iraq", endurance, 636, 175));
         }
 
         public List<Nation> GetSortedList()
