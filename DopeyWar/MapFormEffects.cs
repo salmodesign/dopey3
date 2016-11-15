@@ -12,27 +12,27 @@ namespace DopeyWar
 {
     public partial class MapForm
     {
-        private void DrawMissile(int sX, int sY, int gX, int gY)
+        private void DrawMissile(int startX, int startY, int goalX, int goalY)
         {
             Pen myPen;
 
             Graphics formGraphics = CreateGraphics();
 
-            int x = sX + (gX - sX) / 2;
-            int y = sY + (gY - sY) / 2;
+            int x = startX + (goalX - startX) / 2;
+            int y = startY + (goalY - startY) / 2;
 
             double fX = Scaling.FactorX;
             double fY = Scaling.FactorY;
 
             Random rno = new Random(Guid.NewGuid().GetHashCode());
 
-            Point startPoint = new Point(sX, sY);
+            Point startPoint = new Point(startX, startY);
             Point midPoint = new Point(x - rno.Next(5, 50), y - rno.Next(10, 100));
 
             int xOffset = (int)(60 * Scaling.FactorX);
             int yOffset = (int)(60 * Scaling.FactorY);
 
-            Point hittedRandTarget = new Point(gX + rno.Next(-xOffset/3, xOffset/3), gY + rno.Next(-yOffset/3, yOffset/3));
+            Point hittedRandTarget = new Point(goalX + rno.Next(-xOffset/3, xOffset/3), goalY + rno.Next(-yOffset/3, yOffset/3));
 
             Point[] points = new Point[3] { startPoint, midPoint, hittedRandTarget };
             formGraphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality; //Added for extra quality!
