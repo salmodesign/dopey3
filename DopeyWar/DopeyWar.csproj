@@ -53,6 +53,9 @@
     <Compile Include="MapForm.Designer.cs">
       <DependentUpon>MapForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="MapFormEffects.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Nation.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

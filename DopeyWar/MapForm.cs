@@ -78,6 +78,8 @@ namespace DopeyWar
             formGraphics.DrawCurve(myPen, points);
 
             formGraphics.Dispose();
+
+            DrawMissile(attacker.PositionX, attacker.PositionX, defender.PositionX, defender.PositionY);
         }
 
         public void UpDateList(List<Nation> ListToShow)
