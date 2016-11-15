@@ -12,29 +12,32 @@ namespace DopeyWar
 {
     public partial class MapForm
     {
-        private void DrawMissile(int sX, int sY, int gX, int gY)
+        private void DrawMissile(int startX, int startY, int goalX, int goalY)
         {
             Pen myPen;
 
             Graphics formGraphics = CreateGraphics();
 
-            int x = sX + (gX - sX) / 2;
-            int y = sY + (gY - sY) / 2;
+            int x = startX + (goalX - startX) / 2;
+            int y = startY + (goalY - startY) / 2;
+
+            int offsetX = (int)(Scaling.FactorX * 60);
+            int offsetY = (int)(Scaling.FactorY * 60);
 
             Random rno = new Random(Guid.NewGuid().GetHashCode());
 
-            Point startPoint = new Point(sX, sY);
-            Point midPoint = new Point(x - rno.Next(5, 50), y - rno.Next(10, 100));
-            Point hittedRandTarget = new Point(gX + rno.Next(-20, 20), gY + rno.Next(-20, 20));
+            Point startPoint = new Point(startX, startY);
+            Point midPoint = new Point(x - rno.Next(offsetX/12, offsetX), y - rno.Next(offsetY/6, offsetY));
+            Point hittedRandTarget = new Point(goalX + rno.Next(-offsetX/3, offsetX/3), goalY + rno.Next(-offsetY/3, offsetY/3));
             Point[] points = new Point[3] { startPoint, midPoint, hittedRandTarget };
             formGraphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality; //Added for extra quality!
 
             myPen = new Pen(Color.OrangeRed, 2);
-            formGraphics.DrawEllipse(myPen, hittedRandTarget.X - 5, hittedRandTarget.Y - 3, 10, 6);
+            formGraphics.DrawEllipse(myPen, hittedRandTarget.X - offsetX/12, hittedRandTarget.Y - offsetY/20, offsetX/6, offsetY/10);
             myPen = new Pen(Color.Yellow, 1);
-            formGraphics.DrawEllipse(myPen, hittedRandTarget.X - 10, hittedRandTarget.Y - 6, 20, 12);
+            formGraphics.DrawEllipse(myPen, hittedRandTarget.X - offsetX/6, hittedRandTarget.Y - offsetY/10, offsetX/3, offsetY/5);
 
-            myPen = new Pen(Color.Red, 3);
+            myPen = new Pen(Color.LightBlue, 3);
             formGraphics.DrawCurve(myPen, points);
 
             formGraphics.Dispose();
