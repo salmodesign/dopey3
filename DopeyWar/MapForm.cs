@@ -82,7 +82,7 @@ namespace DopeyWar
 
             formGraphics.Dispose();
 
-            DrawMissile(attacker.PositionX, attacker.PositionX, defender.PositionX, defender.PositionY);
+            //DrawMissile(attacker.PositionX, attacker.PositionX, defender.PositionX, defender.PositionY);
         }
 
         public void UpDateList(List<Nation> ListToShow)
@@ -159,35 +159,33 @@ namespace DopeyWar
                 Point winnerPoint = new Point(winner.PositionX, winner.PositionY);
 
                 
-                Controls.Add(new Label {Name = "Label", Location = winnerPoint, AutoSize = true, BackColor = Color.Black, ForeColor = Color.Green, Text = winner + "\nWINNER" });
+                Controls.Add(new Label {Location = winnerPoint, AutoSize = true, BackColor = Color.Black, ForeColor = Color.Green, Text = winner + "\nWINNER" });
                 
-                string name = @"..\..\"+winner.ToString() + ".gif";
+                string name = @"..\..\" + winner.ToString() + ".gif";
+                string sound = @"..\..\" + winner.ToString() + ".wav";
                 PictureBox pb = new PictureBox()
                 {
-
                     Location = winnerPoint,
-                    Visible = true,
                     Size = new Size(200, 100),
                     ImageLocation = name,
                     BackColor = Color.Transparent,
-                    
-                       
+                    SizeMode = PictureBoxSizeMode.StretchImage,
                 };
-                //pb.Parent = 
+                Controls.Add(pb);
+                _anthemSound = new SoundPlayer(sound);
+                _anthemSound.Play();
+                //TO DO check sound and cut in beginings if slow start. 
+                //To Do check for each in order to make flag over labels. 
+                
+            //pb.Parent = 
                 //pb.BringToFront();
-
-                //pb.Image = Properties.Resources.North_Korea;
-                pb.SizeMode = PictureBoxSizeMode.StretchImage;
-                _anthemSound = new SoundPlayer (@"..\..\USA.wav");
-                //_anthemSound.Play();
+                
 
                 //pb.Left = (this.ClientSize.Width - pb.Width) / 2;
                 //pb.Top = (this.ClientSize.Height - pb.Height) / 2;
 
-                //pb.Image = Bitmap.FromFile(@"worldmap.jpg");
-                //pb.Dock = DockStyle.Fill;
-                //Location = winnerPoint;
-                Controls.Add(pb);
+               
+                
             }  
         }
 
