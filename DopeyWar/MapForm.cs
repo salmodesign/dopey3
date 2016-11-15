@@ -57,32 +57,32 @@ namespace DopeyWar
         {
             ChangeActivityLabel(attacker, defender);
 
-            Pen myPen;
+            //Pen myPen;
             
-            Graphics formGraphics = CreateGraphics();
+            //Graphics formGraphics = CreateGraphics();
 
-            int x = attacker.PositionX + (defender.PositionX - attacker.PositionX) / 2;
-            int y = attacker.PositionY + (defender.PositionY - attacker.PositionY) / 2;
+            //int x = attacker.PositionX + (defender.PositionX - attacker.PositionX) / 2;
+            //int y = attacker.PositionY + (defender.PositionY - attacker.PositionY) / 2;
 
-            Random rno = new Random(Guid.NewGuid().GetHashCode());
+            //Random rno = new Random(Guid.NewGuid().GetHashCode());
 
-            Point startPoint = new Point(attacker.PositionX, attacker.PositionY);
-            Point midPoint = new Point(x - rno.Next(5,50), y - rno.Next(10,100));
-            Point hittedRandTarget = new Point(defender.PositionX + rno.Next(-20, 20), defender.PositionY + rno.Next(-20, 20));
-            Point[] points = new Point[3] { startPoint, midPoint, hittedRandTarget};
-            formGraphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality; //Added for extra quality!
+            //Point startPoint = new Point(attacker.PositionX, attacker.PositionY);
+            //Point midPoint = new Point(x - rno.Next(5,50), y - rno.Next(10,100));
+            //Point hittedRandTarget = new Point(defender.PositionX + rno.Next(-20, 20), defender.PositionY + rno.Next(-20, 20));
+            //Point[] points = new Point[3] { startPoint, midPoint, hittedRandTarget};
+            //formGraphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality; //Added for extra quality!
             
-            myPen = new Pen(Color.OrangeRed, 2);
-            formGraphics.DrawEllipse(myPen, hittedRandTarget.X - 5, hittedRandTarget.Y-3, 10, 6);
-            myPen = new Pen(Color.Yellow, 1);
-            formGraphics.DrawEllipse(myPen, hittedRandTarget.X - 10, hittedRandTarget.Y - 6, 20, 12);
+            //myPen = new Pen(Color.OrangeRed, 2);
+            //formGraphics.DrawEllipse(myPen, hittedRandTarget.X - 5, hittedRandTarget.Y-3, 10, 6);
+            //myPen = new Pen(Color.Yellow, 1);
+            //formGraphics.DrawEllipse(myPen, hittedRandTarget.X - 10, hittedRandTarget.Y - 6, 20, 12);
 
-            myPen = new Pen(Color.LightBlue, 3);
-            formGraphics.DrawCurve(myPen, points);
+            //myPen = new Pen(Color.LightBlue, 3);
+            //formGraphics.DrawCurve(myPen, points);
 
-            formGraphics.Dispose();
+            //formGraphics.Dispose();
 
-            DrawMissile(attacker.PositionX, attacker.PositionX, defender.PositionX, defender.PositionY);
+            DrawMissile(attacker.PositionX, attacker.PositionY, defender.PositionX, defender.PositionY);
         }
 
         public void UpDateList(List<Nation> ListToShow)
