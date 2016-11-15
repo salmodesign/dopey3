@@ -21,6 +21,8 @@ namespace DopeyWar
 
         private bool _scaleIsSet;
 
+        private bool _programIsfinished = false;
+
         private SoundPlayer _anthemSound;
       
 
@@ -35,9 +37,7 @@ namespace DopeyWar
             //statsListView.Columns.Add("Endurance", 50);
 
             _timer = new Timer();
-
-            _timer.Interval = 100;
-
+            
             _timer.Interval = 200;
 
             _timer.Tick += _timer_Tick;
@@ -57,36 +57,7 @@ namespace DopeyWar
         {
             ChangeActivityLabel(attacker, defender);
 
-            //Pen myPen;
-            
-            //Graphics formGraphics = CreateGraphics();
-
-            //int x = attacker.PositionX + (defender.PositionX - attacker.PositionX) / 2;
-            //int y = attacker.PositionY + (defender.PositionY - attacker.PositionY) / 2;
-
-            //Random rno = new Random(Guid.NewGuid().GetHashCode());
-
-            //Point startPoint = new Point(attacker.PositionX, attacker.PositionY);
-            //Point midPoint = new Point(x - rno.Next(5,50), y - rno.Next(10,100));
-            //Point hittedRandTarget = new Point(defender.PositionX + rno.Next(-20, 20), defender.PositionY + rno.Next(-20, 20));
-            //Point[] points = new Point[3] { startPoint, midPoint, hittedRandTarget};
-            //formGraphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality; //Added for extra quality!
-            
-            //myPen = new Pen(Color.OrangeRed, 2);
-            //formGraphics.DrawEllipse(myPen, hittedRandTarget.X - 5, hittedRandTarget.Y-3, 10, 6);
-            //myPen = new Pen(Color.Yellow, 1);
-            //formGraphics.DrawEllipse(myPen, hittedRandTarget.X - 10, hittedRandTarget.Y - 6, 20, 12);
-
-            //myPen = new Pen(Color.LightBlue, 3);
-            //formGraphics.DrawCurve(myPen, points);
-
-            //formGraphics.Dispose();
-
-<<<<<<< HEAD
-            //DrawMissile(attacker.PositionX, attacker.PositionX, defender.PositionX, defender.PositionY);
-=======
             DrawMissile(attacker.PositionX, attacker.PositionY, defender.PositionX, defender.PositionY);
->>>>>>> origin/master
         }
 
         public void UpDateList(List<Nation> ListToShow)
@@ -137,9 +108,12 @@ namespace DopeyWar
             }
             if (_timer.Enabled == false)
             {
+                if (_programIsfinished)
+                    Application.Exit();
                 startAndStopButton.Text = "Stop";
                 _timer.Start();
             }
+            
             else
             {
                 startAndStopButton.Text = "Resume";
@@ -158,11 +132,11 @@ namespace DopeyWar
             if (_ww3.CheckIfWinner())
             {
                 _timer.Stop();
-                startAndStopButton.Enabled = false;
+                startAndStopButton.Text = "Exit Program";
+                _programIsfinished = true;
                 Nation winner = _ww3.Attacker;
                 Point winnerPoint = new Point(winner.PositionX, winner.PositionY);
 
-                
                 Controls.Add(new Label {Location = winnerPoint, AutoSize = true, BackColor = Color.Black, ForeColor = Color.Green, Text = winner + "\nWINNER" });
                 
                 string name = @"..\..\" + winner.ToString() + ".gif";
@@ -176,20 +150,15 @@ namespace DopeyWar
                     SizeMode = PictureBoxSizeMode.StretchImage,
                 };
                 Controls.Add(pb);
+                pb.BringToFront();
                 _anthemSound = new SoundPlayer(sound);
                 _anthemSound.Play();
-                //TO DO check sound and cut in beginings if slow start. 
-                //To Do check for each in order to make flag over labels. 
-                
-            //pb.Parent = 
-                //pb.BringToFront();
-                
 
+                //TO DO check sound and cut in beginings if slow start. 
+ 
                 //pb.Left = (this.ClientSize.Width - pb.Width) / 2;
                 //pb.Top = (this.ClientSize.Height - pb.Height) / 2;
-
-               
-                
+     
             }  
         }
 
