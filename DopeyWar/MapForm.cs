@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Media;
 
 namespace DopeyWar
 {
@@ -19,6 +20,8 @@ namespace DopeyWar
         private Timer _timer;
 
         private bool _scaleIsSet;
+
+        private SoundPlayer _anthemSound;
       
 
         public MapForm()
@@ -154,19 +157,32 @@ namespace DopeyWar
                 startAndStopButton.Enabled = false;
                 Nation winner = _ww3.Attacker;
                 Point winnerPoint = new Point(winner.PositionX, winner.PositionY);
-                Controls.Add(new Label { Location = winnerPoint, AutoSize = true, BackColor = Color.Black, ForeColor = Color.Green, Text = winner + "\nWINNER" });
 
-                //string name = winner.ToString() + ".jpg";
+                
+                Controls.Add(new Label {Name = "Label", Location = winnerPoint, AutoSize = true, BackColor = Color.Black, ForeColor = Color.Green, Text = winner + "\nWINNER" });
+                
+                string name = @"..\..\"+winner.ToString() + ".gif";
                 PictureBox pb = new PictureBox()
                 {
 
                     Location = winnerPoint,
                     Visible = true,
-                    //Size = new Size(100,100);
-
+                    Size = new Size(200, 100),
+                    ImageLocation = name,
+                    BackColor = Color.Transparent,
+                    
+                       
                 };
-                pb.Image = Properties.Resources.North_Korea;
+                //pb.Parent = 
+                //pb.BringToFront();
+
+                //pb.Image = Properties.Resources.North_Korea;
                 pb.SizeMode = PictureBoxSizeMode.StretchImage;
+                _anthemSound = new SoundPlayer (@"..\..\USA.wav");
+                //_anthemSound.Play();
+
+                //pb.Left = (this.ClientSize.Width - pb.Width) / 2;
+                //pb.Top = (this.ClientSize.Height - pb.Height) / 2;
 
                 //pb.Image = Bitmap.FromFile(@"worldmap.jpg");
                 //pb.Dock = DockStyle.Fill;
