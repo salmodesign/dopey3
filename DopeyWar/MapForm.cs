@@ -40,11 +40,20 @@ namespace DopeyWar
 
             _timer = new Timer();
             
-            _timer.Interval = 200;
+            _timer.Interval = 1500;
 
             _timer.Tick += _timer_Tick;
 
             _scaleIsSet = false;
+
+            _graphicsTimer = new Timer();
+
+            _graphicsTimer.Interval = 100;
+
+            _graphicsTimer.Tick += _graphics_Tick;
+
+            _missilePath = new Point[9];
+            _timerCounter = 1;
 
         }
 
@@ -60,7 +69,7 @@ namespace DopeyWar
         {
             ChangeActivityLabel(attacker, defender);
 
-            DrawMissile(attacker.PositionX, attacker.PositionY, defender.PositionX, defender.PositionY);
+            CreateMissilePath(attacker.PositionX, attacker.PositionY, defender.PositionX, defender.PositionY);
         }
 
         public void UpDateList(List<Nation> ListToShow)
