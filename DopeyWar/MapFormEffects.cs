@@ -28,77 +28,40 @@ namespace DopeyWar
 
             int offset = (int)(Scaling.FactorX * 12); //Offset is depending on scaling!
 
+            _hittedTarget = GetHittedRandomTarget(goalX, goalY, offset);
 
+            offset *= (int)(distance * 0.01);       //Offset is now depending on distance and scaling!
+            int last = _path.Length - 1;            
+            int start = last / 2;                   //Start with index of midpoint between start and goal
+            int current = start;                    
+            bool allPointsDefined = false;
 
-            //Pick the target by a random offset:
+            _path[0] = new Point(startX, startY);   //Set the starting point (index 0) in array
+            _path[last] = _hittedTarget;            //Set the target point (last index) in array
+
+            while (!allPointsDefined)               //Loop sets the rest of the points in array
+            {
+                //Make the current point to a midpoint between the closest defined points
+                _path[current] = GetRandMidpoint(_path[current - start], _path[current + start], offset);
+
+                current = current + 2*start; //Increase current index two times the start value
+
+                if (current >= last)         //If the end of array is reached
+                {
+                    start = start / 2;       //Set a new starting index
+                    current = start;
+                    offset = offset / 4;
+                }   
+
+                if (start == 0)              //At the end... start = start/2 will give start == 0
+                    allPointsDefined = true; //Means all points in array are filled!
+            }
+        }
+
+        private Point GetHittedRandomTarget(int pX, int pY, int offset)
+        {
             Random rno = new Random(Guid.NewGuid().GetHashCode());
-            _hittedTarget = new Point(goalX + rno.Next(-offset, offset), goalY + rno.Next(-offset, offset));
-
-            offset *= (int)(distance * 0.005); //Offset is now depending on distance and scaling!
-
-
-            _path[0] = new Point(startX, startY);
-            _path[16] = _hittedTarget;
-
-            //Loop 1
-            _path[8] = GetRandMidpoint(_path[0], _path[16], offset); //midpoint
-
-            //Loop 2
-            _path[4] = GetRandMidpoint(_path[0], _path[8], offset / 2); //1/4
-            _path[12] = GetRandMidpoint(_path[8], _path[16], offset / 2); //3/4
-
-            //Loop 3
-            _path[2] = GetRandMidpoint(_path[0], _path[4], offset / 8); // 1/8
-            _path[6] = GetRandMidpoint(_path[4], _path[8], offset / 4); // 3/8
-            _path[10] = GetRandMidpoint(_path[8], _path[12], offset / 4); // 5/8
-            _path[14] = GetRandMidpoint(_path[12], _path[16], offset / 8); // 7/8
-
-            //Loop 4
-            _path[1] = GetRandMidpoint(_path[0], _path[2], offset / 16); // 1/8
-            _path[3] = GetRandMidpoint(_path[2], _path[4], offset / 16); // 3/8
-            _path[5] = GetRandMidpoint(_path[4], _path[6], offset / 16); // 5/8
-            _path[7] = GetRandMidpoint(_path[6], _path[8], offset / 16); // 7/8
-            _path[9] = GetRandMidpoint(_path[8], _path[10], offset / 16); // 1/8
-            _path[11] = GetRandMidpoint(_path[10], _path[12], offset / 16); // 3/8
-            _path[13] = GetRandMidpoint(_path[12], _path[14], offset / 16); // 5/8
-            _path[15] = GetRandMidpoint(_path[14], _path[16], offset / 16); // 7/8
-
-            int last = _path.Length - 1;
-
-            int mid1 = last / 2;
-
-            //_path[0] = new Point(startX, startY);
-            //_path[8] = _hittedTarget;
-
-            ////Loop 1
-            //_path[4] = GetRandMidpoint(_path[0], _path[8], offset); //midpoint
-
-            ////Loop 2
-            //_path[2] = GetRandMidpoint(_path[0], _path[4], offset / 2); //1/4
-            //_path[6] = GetRandMidpoint(_path[4], _path[8], offset / 2); //3/4
-
-            ////Loop 3
-            //_path[1] = GetRandMidpoint(_path[0], _path[2], offset / 8); // 1/8
-            //_path[3] = GetRandMidpoint(_path[2], _path[4], offset / 4); // 3/8
-            //_path[5] = GetRandMidpoint(_path[4], _path[6], offset / 4); // 5/8
-            //_path[7] = GetRandMidpoint(_path[6], _path[8], offset / 8); // 7/8
-
-
-            //---
-
-            //Point start = new Point(startX, startY);
-            //Point mid = GetRandMidpoint(start, _hittedTarget, offset);
-
-            //Point p1 = GetRandMidpoint(start, mid, offset / 2);
-            //Point p2 = GetRandMidpoint(mid, _hittedTarget, offset / 2);
-
-            //Point q1 = GetRandMidpoint(start, p1, 0);
-            //Point q2 = GetRandMidpoint(p1, mid, 0);
-            //Point q3 = GetRandMidpoint(mid, p2, 0);
-            //Point q4 = GetRandMidpoint(p2, _hittedTarget, 0);
-
-            //_path = new Point[] { start, q1, p1, q2, mid, q3, p2, q4, _hittedTarget };
-
+            return new Point(pX + rno.Next(-offset, offset), pY + rno.Next(-offset, offset));
         }
 
         private Point GetRandMidpoint(Point p1, Point p2, int offset)
@@ -108,7 +71,7 @@ namespace DopeyWar
 
             Random rno = new Random(Guid.NewGuid().GetHashCode());
 
-            return new Point(x + rno.Next(-offset, offset), y + rno.Next(-offset, offset));
+            return new Point(x + rno.Next(-offset, 0), y + rno.Next(-offset, 0));
         }
 
         private void DrawMissilePath()
