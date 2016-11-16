@@ -34,38 +34,70 @@ namespace DopeyWar
             Random rno = new Random(Guid.NewGuid().GetHashCode());
             _hittedTarget = new Point(goalX + rno.Next(-offset, offset), goalY + rno.Next(-offset, offset));
 
-            offset *= (int)(distance * 0.006); //Offset is now depending on distance and scaling!
+            offset *= (int)(distance * 0.005); //Offset is now depending on distance and scaling!
 
-            int last = 8; //Index of last element in _path array
 
-            //_path[last] = _hittedTarget;
+            _path[0] = new Point(startX, startY);
+            _path[16] = _hittedTarget;
+
+            //Loop 1
+            _path[8] = GetRandMidpoint(_path[0], _path[16], offset); //midpoint
+
+            //Loop 2
+            _path[4] = GetRandMidpoint(_path[0], _path[8], offset / 2); //1/4
+            _path[12] = GetRandMidpoint(_path[8], _path[16], offset / 2); //3/4
+
+            //Loop 3
+            _path[2] = GetRandMidpoint(_path[0], _path[4], offset / 8); // 1/8
+            _path[6] = GetRandMidpoint(_path[4], _path[8], offset / 4); // 3/8
+            _path[10] = GetRandMidpoint(_path[8], _path[12], offset / 4); // 5/8
+            _path[14] = GetRandMidpoint(_path[12], _path[16], offset / 8); // 7/8
+
+            //Loop 4
+            _path[1] = GetRandMidpoint(_path[0], _path[2], offset / 16); // 1/8
+            _path[3] = GetRandMidpoint(_path[2], _path[4], offset / 16); // 3/8
+            _path[5] = GetRandMidpoint(_path[4], _path[6], offset / 16); // 5/8
+            _path[7] = GetRandMidpoint(_path[6], _path[8], offset / 16); // 7/8
+            _path[9] = GetRandMidpoint(_path[8], _path[10], offset / 16); // 1/8
+            _path[11] = GetRandMidpoint(_path[10], _path[12], offset / 16); // 3/8
+            _path[13] = GetRandMidpoint(_path[12], _path[14], offset / 16); // 5/8
+            _path[15] = GetRandMidpoint(_path[14], _path[16], offset / 16); // 7/8
+
+            int last = _path.Length - 1;
+
+            int mid1 = last / 2;
+
             //_path[0] = new Point(startX, startY);
+            //_path[8] = _hittedTarget;
 
-            //_path[last/(1*2)] = GetRandMidpoint(_path[0], _path[last], offset); //midpoint
+            ////Loop 1
+            //_path[4] = GetRandMidpoint(_path[0], _path[8], offset); //midpoint
 
-            //_path[last/(1*4)] = GetRandMidpoint(_path[0], _path[last/(1*2)], offset/2); //1/4
-            //_path[last/(3*4)] = GetRandMidpoint(_path[last/(1*2)], _path[last], offset/2); //3/4
+            ////Loop 2
+            //_path[2] = GetRandMidpoint(_path[0], _path[4], offset / 2); //1/4
+            //_path[6] = GetRandMidpoint(_path[4], _path[8], offset / 2); //3/4
 
-            //_path[last/(1*8)] = GetRandMidpoint(_path[0], _path[last/(1*4)], offset/4);
-            //_path[last/(3*8)] = GetRandMidpoint(_path[last/(1*4)], _path[last/(1*2)], offset/4);
-            //_path[last/(5*8)] = GetRandMidpoint(_path[last/(1*2)], _path[last/(3*4)], offset / 4);
-            //_path[last/(7*8)] = GetRandMidpoint(_path[last/(3*4)], _path[last], offset / 4);
+            ////Loop 3
+            //_path[1] = GetRandMidpoint(_path[0], _path[2], offset / 8); // 1/8
+            //_path[3] = GetRandMidpoint(_path[2], _path[4], offset / 4); // 3/8
+            //_path[5] = GetRandMidpoint(_path[4], _path[6], offset / 4); // 5/8
+            //_path[7] = GetRandMidpoint(_path[6], _path[8], offset / 8); // 7/8
 
 
             //---
 
-            Point start = new Point(startX, startY);
-            Point mid = GetRandMidpoint(start, _hittedTarget, offset);
+            //Point start = new Point(startX, startY);
+            //Point mid = GetRandMidpoint(start, _hittedTarget, offset);
 
-            Point p1 = GetRandMidpoint(start, mid, offset / 2);
-            Point p2 = GetRandMidpoint(mid, _hittedTarget, offset / 2);
+            //Point p1 = GetRandMidpoint(start, mid, offset / 2);
+            //Point p2 = GetRandMidpoint(mid, _hittedTarget, offset / 2);
 
-            Point q1 = GetRandMidpoint(start, p1, 0);
-            Point q2 = GetRandMidpoint(p1, mid, 0);
-            Point q3 = GetRandMidpoint(mid, p2, 0);
-            Point q4 = GetRandMidpoint(p2, _hittedTarget, 0);
+            //Point q1 = GetRandMidpoint(start, p1, 0);
+            //Point q2 = GetRandMidpoint(p1, mid, 0);
+            //Point q3 = GetRandMidpoint(mid, p2, 0);
+            //Point q4 = GetRandMidpoint(p2, _hittedTarget, 0);
 
-            _path = new Point[] { start, q1, p1, q2, mid, q3, p2, q4, _hittedTarget };
+            //_path = new Point[] { start, q1, p1, q2, mid, q3, p2, q4, _hittedTarget };
 
         }
 

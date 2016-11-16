@@ -44,7 +44,7 @@ namespace DopeyWar
 
             _scaleIsSet = false;
 
-            _path = new Point[9];
+            _path = new Point[17];
             _timerCounter = 0;
 
         }
@@ -142,11 +142,11 @@ namespace DopeyWar
                 
             }
                 
-            if (_timerCounter >= 1 && _timerCounter <= 8)
+            if (_timerCounter >= 1 && _timerCounter <= 16)
             {
                 DrawMissilePath();
             }
-            if (_timerCounter == 9)
+            if (_timerCounter == 17)
             {
                 SoundPlayer _bombSound = new SoundPlayer(@"..\..\Bomb_Exploding.wav");
                 _bombSound.Play();
