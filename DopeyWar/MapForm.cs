@@ -34,23 +34,11 @@ namespace DopeyWar
 
             _orgFormSize = new Size(Size.Width, Size.Height); //Store the original form size
 
-            
-            //statsListView.Columns.Add("Nation", 85);
-            //statsListView.Columns.Add("Endurance", 50);
-
             _timer = new Timer();
-            
             _timer.Interval = 140;
-
             _timer.Tick += _timer_Tick;
 
             _scaleIsSet = false;
-
-            _graphicsTimer = new Timer();
-
-            _graphicsTimer.Interval = 100;
-
-            _graphicsTimer.Tick += _graphics_Tick;
 
             _missilePath = new Point[9];
             _timerCounter = 0;
@@ -64,7 +52,7 @@ namespace DopeyWar
             StartAndStop();
         }
 
-        public void UpDateList(List<Nation> ListToShow)
+        public void UpDateStatsList(List<Nation> ListToShow)
         {
             statsListView.Items.Clear();
 
@@ -138,8 +126,9 @@ namespace DopeyWar
             }
             if (_timerCounter == 9)
             {
+                //BackgroundImage = Properties.Resources.worldmap_light;
                 DrawHittedTarget();
-                UpDateList(_ww3.GetSortedList());
+                UpDateStatsList(_ww3.GetSortedList());
 
                 if (_ww3.Defender.Endurance == 0)
                     DisplayDefeated(_ww3.Defender);
@@ -151,7 +140,6 @@ namespace DopeyWar
                     _programIsfinished = true;
                     CelebrateWinner(_ww3.Attacker);
                 }
-                
             }
 
             _timerCounter++;
@@ -183,7 +171,7 @@ namespace DopeyWar
             startAndStopButton.Enabled = true;
 
             _ww3 = new War(_endurance);
-            UpDateList(_ww3.GetSortedList());
+            UpDateStatsList(_ww3.GetSortedList());
         }
         private void DisableFormResizing()
         {
