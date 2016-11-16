@@ -15,30 +15,9 @@ namespace DopeyWar
 
         public int PositionX { get; set; }
         public int PositionY { get; set; }
-
-        public int Endurance
-        {
-            get
-            {
-                return _endurance;
-            }
-        }
-
-        public int Shots
-        {
-            get
-            {
-                return _shots;
-            }
-        }
-
-        public int Kills
-        {
-            get
-            {
-                return _kills;
-            }
-        }
+        public int Endurance { get { return _endurance; }}
+        public int Shots { get { return _shots; } }
+        public int Kills { get { return _kills; } }
 
         public Nation(string name, int endurance, int x, int y)
         {
@@ -46,7 +25,6 @@ namespace DopeyWar
             _endurance = endurance;
             _shots = 0;
             _kills = 0;
-
             PositionX = x;
             PositionY = y;
 
