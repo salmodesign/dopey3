@@ -13,41 +13,63 @@ namespace DopeyWar
 {
     public partial class MapForm
     {
-        private Timer _graphicsTimer;
-        private Point[] _missilePath;
+        private Point[] _path;
         private Point _hittedTarget;
         private int _timerCounter;
-        private int _offset;
 
         private void CreateMissilePath(Nation attacker, Nation defender)
         {
-            _offset = (int)(Scaling.FactorX * 12);
-
             int startX = attacker.PositionX;
             int startY = attacker.PositionY;
             int goalX = defender.PositionX;
             int goalY = defender.PositionY;
 
+            double distance = Math.Sqrt((Math.Pow(startX - goalX, 2) + Math.Pow(startY - goalY, 2)));
+
+            int offset = (int)(Scaling.FactorX * 12); //Offset is depending on scaling!
+
+
+
+            //Pick the target by a random offset:
             Random rno = new Random(Guid.NewGuid().GetHashCode());
-            _hittedTarget = new Point(goalX + rno.Next(-_offset, _offset), goalY + rno.Next(-_offset, _offset));
+            _hittedTarget = new Point(goalX + rno.Next(-offset, offset), goalY + rno.Next(-offset, offset));
+
+            offset *= (int)(distance * 0.006); //Offset is now depending on distance and scaling!
+
+            int last = 8; //Index of last element in _path array
+
+            //_path[last] = _hittedTarget;
+            //_path[0] = new Point(startX, startY);
+
+            //_path[last/(1*2)] = GetRandMidpoint(_path[0], _path[last], offset); //midpoint
+
+            //_path[last/(1*4)] = GetRandMidpoint(_path[0], _path[last/(1*2)], offset/2); //1/4
+            //_path[last/(3*4)] = GetRandMidpoint(_path[last/(1*2)], _path[last], offset/2); //3/4
+
+            //_path[last/(1*8)] = GetRandMidpoint(_path[0], _path[last/(1*4)], offset/4);
+            //_path[last/(3*8)] = GetRandMidpoint(_path[last/(1*4)], _path[last/(1*2)], offset/4);
+            //_path[last/(5*8)] = GetRandMidpoint(_path[last/(1*2)], _path[last/(3*4)], offset / 4);
+            //_path[last/(7*8)] = GetRandMidpoint(_path[last/(3*4)], _path[last], offset / 4);
+
+
+            //---
 
             Point start = new Point(startX, startY);
-            Point mid = CreateRandomMidpoint(start, _hittedTarget, _offset);
+            Point mid = GetRandMidpoint(start, _hittedTarget, offset);
 
-            Point p1 = CreateRandomMidpoint(start, mid, _offset / 2);
-            Point p2 = CreateRandomMidpoint(mid, _hittedTarget, _offset / 2);
+            Point p1 = GetRandMidpoint(start, mid, offset / 2);
+            Point p2 = GetRandMidpoint(mid, _hittedTarget, offset / 2);
 
-            Point q1 = CreateRandomMidpoint(start, p1, 0);
-            Point q2 = CreateRandomMidpoint(p1, mid, 0);
-            Point q3 = CreateRandomMidpoint(mid, p2, 0);
-            Point q4 = CreateRandomMidpoint(p2, _hittedTarget, 0);
+            Point q1 = GetRandMidpoint(start, p1, 0);
+            Point q2 = GetRandMidpoint(p1, mid, 0);
+            Point q3 = GetRandMidpoint(mid, p2, 0);
+            Point q4 = GetRandMidpoint(p2, _hittedTarget, 0);
 
-
-            _missilePath = new Point[] { start, q1, p1, q2, mid, q3, p2, q4, _hittedTarget };
+            _path = new Point[] { start, q1, p1, q2, mid, q3, p2, q4, _hittedTarget };
 
         }
 
-        private Point CreateRandomMidpoint(Point p1, Point p2, int offset)
+        private Point GetRandMidpoint(Point p1, Point p2, int offset)
         {
             int x = p1.X + (p2.X - p1.X) / 2;
             int y = p1.Y + (p2.Y - p1.Y) / 2;
@@ -61,20 +83,21 @@ namespace DopeyWar
         {
             Graphics fg = CreateGraphics();
             fg.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality; //Added for extra quality!
-            fg.DrawCurve(new Pen(Color.LightBlue, 3), _missilePath, 0, _timerCounter, 0.5F);
+            fg.DrawCurve(new Pen(Color.LightBlue, 3), _path, 0, _timerCounter, 0.5F);
             fg.Dispose();
 
         }
 
         private void DrawHittedTarget()
         {
+            int offset = (int)(Scaling.FactorX * 12);
             Pen myPen;
             Graphics fg = CreateGraphics();
             fg.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality; //Added for extra quality!
             myPen = new Pen(Color.OrangeRed, 2);
-            fg.DrawEllipse(myPen, _hittedTarget.X - _offset/4, _hittedTarget.Y - _offset / 8, _offset / 2, _offset / 4);
+            fg.DrawEllipse(myPen, _hittedTarget.X - offset/4, _hittedTarget.Y - offset / 8, offset / 2, offset / 4);
             myPen = new Pen(Color.Yellow, 1);
-            fg.DrawEllipse(myPen, _hittedTarget.X - _offset/2, _hittedTarget.Y - _offset / 4, _offset, _offset / 2);
+            fg.DrawEllipse(myPen, _hittedTarget.X - offset/2, _hittedTarget.Y - offset / 4, offset, offset / 2);
             fg.Dispose();
         }
 

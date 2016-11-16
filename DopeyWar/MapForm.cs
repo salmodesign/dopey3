@@ -40,7 +40,7 @@ namespace DopeyWar
 
             _scaleIsSet = false;
 
-            _missilePath = new Point[9];
+            _path = new Point[9];
             _timerCounter = 0;
 
         }
