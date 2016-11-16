@@ -26,7 +26,11 @@ namespace DopeyWar
         private int _endurance = 3;
 
         private SoundPlayer _anthemSound;
-      
+
+        private PictureBox _gifPB;
+
+        
+
 
         public MapForm()
         {
@@ -78,6 +82,18 @@ namespace DopeyWar
             Point defenderPoint = new Point(defender.PositionX, defender.PositionY);
             Controls.Add(new Label { Location=defenderPoint, AutoSize=true, BackColor=Color.Black, ForeColor=Color.Red, Text = defender + "\nDEFEATED"});
             warActivityLabel.Text += "\n" + defender + " defeated!";
+            Point nextToDefenderPoint = new Point(defenderPoint.X - 25, defenderPoint.Y - 25);
+            _gifPB = new PictureBox()
+            {
+                Location = nextToDefenderPoint,
+                Size = new Size(35, 35),
+                ImageLocation = @"..\..\bomb.gif",
+                BackColor = Color.Transparent,
+                SizeMode = PictureBoxSizeMode.StretchImage
+            };
+            Controls.Add(_gifPB);
+            _gifPB.SendToBack();
+
         }
 
         private void MapForm_ResizeEnd(object sender, EventArgs e)
@@ -111,6 +127,7 @@ namespace DopeyWar
             {
                 startAndStopButton.Text = "Resume";
                 _timer.Stop();
+            
             }                      
         }
         private void _timer_Tick(object sender, EventArgs e)
@@ -120,6 +137,9 @@ namespace DopeyWar
                 _ww3.CreateAttack();
                 warActivityLabel.Text = _ww3.Attacker + " attacks " + _ww3.Defender;
                 CreateMissilePath(_ww3.Attacker, _ww3.Defender);
+                SoundPlayer _rocketSound = new SoundPlayer(@"..\..\Buster_Missle.wav");
+                _rocketSound.Play();
+                
             }
                 
             if (_timerCounter >= 1 && _timerCounter <= 8)
@@ -128,8 +148,14 @@ namespace DopeyWar
             }
             if (_timerCounter == 9)
             {
-                //BackgroundImage = Properties.Resources.worldmap_light;
+                SoundPlayer _bombSound = new SoundPlayer(@"..\..\Bomb_Exploding.wav");
+                _bombSound.Play();
                 DrawHittedTarget();
+
+                
+
+                
+
                 UpDateStatsList(_ww3.GetSortedList());
 
                 if (_ww3.Defender.Endurance == 0)
