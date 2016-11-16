@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Media;
 
 namespace DopeyWar
 {
@@ -18,9 +19,16 @@ namespace DopeyWar
         private int _timerCounter;
         private int _offset;
 
-        private void CreateMissilePath(int startX, int startY, int goalX, int goalY)
+        private void CreateMissilePath(Nation attacker, Nation defender)
         {
             _offset = (int)(Scaling.FactorX * 12);
+
+            int startX = attacker.PositionX;
+            int startY = attacker.PositionY;
+            int goalX = defender.PositionX;
+            int goalY = defender.PositionY;
+
+
 
             Random rno = new Random(Guid.NewGuid().GetHashCode());
             _hittedTarget = new Point(goalX + rno.Next(-_offset, _offset), goalY + rno.Next(-_offset, _offset));
@@ -39,7 +47,7 @@ namespace DopeyWar
 
             _missilePath = new Point[] { start, q1, p1, q2, mid, q3, p2, q4, _hittedTarget };
 
-            _graphicsTimer.Start();
+            //_graphicsTimer.Start();
         }
 
         private Point CreateRandomMidpoint(Point p1, Point p2, int offset)
@@ -52,7 +60,7 @@ namespace DopeyWar
             return new Point(x + rno.Next(-offset, offset), y + rno.Next(-offset, offset));
         }
 
-        private void DrawLine()
+        private void DrawMissilePath()
         {
             Graphics fg = CreateGraphics();
             fg.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality; //Added for extra quality!
@@ -72,12 +80,34 @@ namespace DopeyWar
             fg.DrawEllipse(myPen, _hittedTarget.X - _offset/2, _hittedTarget.Y - _offset / 4, _offset, _offset / 2);
         }
 
+        private void CelebrateWinner(Nation winner)
+        {
+            Point winnerPoint = new Point(winner.PositionX, winner.PositionY);
+            Point labelWinnerPoint = new Point(winner.PositionX, winner.PositionY - 25);
+
+            Controls.Add(new Label { Location = labelWinnerPoint, AutoSize = true, BackColor = Color.Black, ForeColor = Color.Green, Text = winner + "\nWINNER" });
+
+            string name = @"..\..\" + winner.ToString() + ".gif";
+            string sound = @"..\..\" + winner.ToString() + ".wav";
+            PictureBox pb = new PictureBox()
+            {
+                Location = winnerPoint,
+                Size = new Size(200, 100),
+                ImageLocation = name,
+                BackColor = Color.Transparent,
+                SizeMode = PictureBoxSizeMode.StretchImage,
+            };
+            Controls.Add(pb);
+            pb.BringToFront();
+            _anthemSound = new SoundPlayer(sound);
+            _anthemSound.Play();
+        }
 
         private void _graphics_Tick(object sender, EventArgs e)
         {
             if (_timerCounter < 9)
             {
-                DrawLine();
+                DrawMissilePath();
                 _timerCounter++;
             }
                 

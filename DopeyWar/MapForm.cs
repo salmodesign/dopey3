@@ -40,7 +40,7 @@ namespace DopeyWar
 
             _timer = new Timer();
             
-            _timer.Interval = 1500;
+            _timer.Interval = 140;
 
             _timer.Tick += _timer_Tick;
 
@@ -53,7 +53,7 @@ namespace DopeyWar
             _graphicsTimer.Tick += _graphics_Tick;
 
             _missilePath = new Point[9];
-            _timerCounter = 1;
+            _timerCounter = 0;
 
         }
 
@@ -61,15 +61,7 @@ namespace DopeyWar
 
         private void button1_Click(object sender, EventArgs e)
         {
-            _ww3 = new War(_endurance);
             StartAndStop();
-        }
-
-        public void DisplayWarActivity(Nation attacker, Nation defender)
-        {
-            ChangeActivityLabel(attacker, defender);
-
-            CreateMissilePath(attacker.PositionX, attacker.PositionY, defender.PositionX, defender.PositionY);
         }
 
         public void UpDateList(List<Nation> ListToShow)
@@ -124,8 +116,7 @@ namespace DopeyWar
                     Application.Exit();
                 startAndStopButton.Text = "Stop";
                 _timer.Start();
-            }
-            
+            } 
             else
             {
                 startAndStopButton.Text = "Resume";
@@ -134,39 +125,38 @@ namespace DopeyWar
         }
         private void _timer_Tick(object sender, EventArgs e)
         {
-            _ww3.CreateAttack();
-            DisplayWarActivity(_ww3.Attacker, _ww3.Defender);
-            UpDateList(_ww3.GetSortedList());
-
-            if (_ww3.Defender.Endurance == 0)
-                DisplayDefeated(_ww3.Defender);
-
-            if (_ww3.CheckIfWinner())
+            if (_timerCounter == 0)
             {
-                _timer.Stop();
-                startAndStopButton.Text = "Exit Program";
-                _programIsfinished = true;
-                Nation winner = _ww3.Attacker;
-                Point winnerPoint = new Point(winner.PositionX, winner.PositionY);
-                Point labelWinnerPoint = new Point(winner.PositionX, winner.PositionY -25);
-
-                Controls.Add(new Label {Location = labelWinnerPoint, AutoSize = true, BackColor = Color.Black, ForeColor = Color.Green, Text = winner + "\nWINNER"});
+                _ww3.CreateAttack();
+                warActivityLabel.Text = _ww3.Attacker + " attacks " + _ww3.Defender;
+                CreateMissilePath(_ww3.Attacker, _ww3.Defender);
+            }
                 
-                string name = @"..\..\" + winner.ToString() + ".gif";
-                string sound = @"..\..\" + winner.ToString() + ".wav";
-                PictureBox pb = new PictureBox()
+            if (_timerCounter >= 1 && _timerCounter <= 8)
+            {
+                DrawMissilePath();
+            }
+            if (_timerCounter == 9)
+            {
+                DrawHittedTarget();
+                UpDateList(_ww3.GetSortedList());
+
+                if (_ww3.Defender.Endurance == 0)
+                    DisplayDefeated(_ww3.Defender);
+
+                if (_ww3.CheckIfWinner())
                 {
-                    Location = winnerPoint,
-                    Size = new Size(200, 100),
-                    ImageLocation = name,
-                    BackColor = Color.Transparent,
-                    SizeMode = PictureBoxSizeMode.StretchImage,
-                };
-                Controls.Add(pb);
-                pb.BringToFront();
-                _anthemSound = new SoundPlayer(sound);
-                _anthemSound.Play();
-             }  
+                    _timer.Stop();
+                    startAndStopButton.Text = "Exit Program";
+                    _programIsfinished = true;
+                    CelebrateWinner(_ww3.Attacker);
+                }
+                
+            }
+
+            _timerCounter++;
+            if (_timerCounter > 18)
+                _timerCounter = 0;
         }
 
 
@@ -191,6 +181,9 @@ namespace DopeyWar
         {
             startGroupBox.Visible = false;
             startAndStopButton.Enabled = true;
+
+            _ww3 = new War(_endurance);
+            UpDateList(_ww3.GetSortedList());
         }
         private void DisableFormResizing()
         {
