@@ -39,7 +39,7 @@ namespace DopeyWar
             _orgFormSize = new Size(Size.Width, Size.Height); //Store the original form size
 
             _timer = new Timer();
-            _timer.Interval = 140;
+            _timer.Interval = 100;
             _timer.Tick += _timer_Tick;
 
             _scaleIsSet = false;
@@ -161,25 +161,26 @@ namespace DopeyWar
                 if (_ww3.Defender.Endurance == 0)
                     DisplayDefeated(_ww3.Defender);
 
+            }
+
+            _timerCounter++;
+            if (_timerCounter > 30)
+            {
                 if (_ww3.CheckIfWinner())
                 {
                     _timer.Stop();
                     startAndStopButton.Text = "Exit Program";
                     _programIsfinished = true;
                     CelebrateWinner(_ww3.Attacker);
+                    warActivityLabel.Text = _ww3.Attacker + " WINS!";
+                    warActivityLabel.ForeColor = Color.Green;
                 }
-            }
-
-            _timerCounter++;
-            if (_timerCounter > 18)
                 _timerCounter = 0;
+            }
+                
         }
 
 
-        private void startGroupBox_Enter(object sender, EventArgs e)
-        {
-            
-        }
 
         private void MapForm_ClientSizeChanged(object sender, EventArgs e)
         {

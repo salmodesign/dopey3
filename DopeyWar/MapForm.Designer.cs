@@ -131,7 +131,6 @@
             this.startGroupBox.Size = new System.Drawing.Size(527, 367);
             this.startGroupBox.TabIndex = 3;
             this.startGroupBox.TabStop = false;
-            this.startGroupBox.Enter += new System.EventHandler(this.startGroupBox_Enter);
             // 
             // minusButton
             // 
