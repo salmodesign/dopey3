@@ -148,8 +148,9 @@ namespace DopeyWar
                 _programIsfinished = true;
                 Nation winner = _ww3.Attacker;
                 Point winnerPoint = new Point(winner.PositionX, winner.PositionY);
+                Point labelWinnerPoint = new Point(winner.PositionX, winner.PositionY -25);
 
-                Controls.Add(new Label {Location = winnerPoint, AutoSize = true, BackColor = Color.Black, ForeColor = Color.Green, Text = winner + "\nWINNER" });
+                Controls.Add(new Label {Location = labelWinnerPoint, AutoSize = true, BackColor = Color.Black, ForeColor = Color.Green, Text = winner + "\nWINNER"});
                 
                 string name = @"..\..\" + winner.ToString() + ".gif";
                 string sound = @"..\..\" + winner.ToString() + ".wav";
@@ -165,13 +166,7 @@ namespace DopeyWar
                 pb.BringToFront();
                 _anthemSound = new SoundPlayer(sound);
                 _anthemSound.Play();
-
-                //TO DO check sound and cut in beginings if slow start. 
- 
-                //pb.Left = (this.ClientSize.Width - pb.Width) / 2;
-                //pb.Top = (this.ClientSize.Height - pb.Height) / 2;
-     
-            }  
+             }  
         }
 
 
@@ -211,6 +206,14 @@ namespace DopeyWar
                 _endurance--;
                 showEnduranceLabel.Text = _endurance.ToString();
             }
+        }
+
+        private void statsListView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //this.BackColor = Color.DarkBlue;
+            //BackColor = Color.DarkBlue;
+            //statsListView.BackColor = Color.DarkBlue;
+            //statsListView.ForeColor = Color.Coral;
         }
     }
 }
