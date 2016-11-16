@@ -42,19 +42,25 @@
             this.EnduranceLabel = new System.Windows.Forms.Label();
             this.oKButton = new System.Windows.Forms.Button();
             this.plusButton = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.startGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // startAndStopButton
             // 
+            this.startAndStopButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
             this.startAndStopButton.Enabled = false;
-            this.startAndStopButton.Location = new System.Drawing.Point(11, 538);
-            this.startAndStopButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.startAndStopButton.ForeColor = System.Drawing.SystemColors.InactiveBorder;
+            this.startAndStopButton.Location = new System.Drawing.Point(15, 662);
+            this.startAndStopButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.startAndStopButton.Name = "startAndStopButton";
-            this.startAndStopButton.Size = new System.Drawing.Size(236, 36);
+            this.startAndStopButton.Size = new System.Drawing.Size(315, 44);
             this.startAndStopButton.TabIndex = 0;
             this.startAndStopButton.Text = "Start war";
-            this.startAndStopButton.UseVisualStyleBackColor = true;
+            this.startAndStopButton.UseVisualStyleBackColor = false;
             this.startAndStopButton.Click += new System.EventHandler(this.button1_Click);
             // 
             // statsListView
@@ -66,11 +72,12 @@
             this.columnEndurance,
             this.columnShots,
             this.columnKills});
-            this.statsListView.Enabled = false;
-            this.statsListView.Location = new System.Drawing.Point(12, 269);
-            this.statsListView.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.statsListView.ForeColor = System.Drawing.SystemColors.InactiveBorder;
+            this.statsListView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+            this.statsListView.Location = new System.Drawing.Point(16, 331);
+            this.statsListView.Margin = new System.Windows.Forms.Padding(5);
             this.statsListView.Name = "statsListView";
-            this.statsListView.Size = new System.Drawing.Size(235, 264);
+            this.statsListView.Size = new System.Drawing.Size(312, 324);
             this.statsListView.TabIndex = 1;
             this.statsListView.UseCompatibleStateImageBehavior = false;
             this.statsListView.View = System.Windows.Forms.View.Details;
@@ -100,9 +107,10 @@
             this.warActivityLabel.BackColor = System.Drawing.Color.Black;
             this.warActivityLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.warActivityLabel.ForeColor = System.Drawing.Color.Red;
-            this.warActivityLabel.Location = new System.Drawing.Point(13, 13);
+            this.warActivityLabel.Location = new System.Drawing.Point(17, 16);
+            this.warActivityLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.warActivityLabel.Name = "warActivityLabel";
-            this.warActivityLabel.Size = new System.Drawing.Size(321, 70);
+            this.warActivityLabel.Size = new System.Drawing.Size(428, 86);
             this.warActivityLabel.TabIndex = 2;
             this.warActivityLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -116,11 +124,11 @@
             this.startGroupBox.Controls.Add(this.EnduranceLabel);
             this.startGroupBox.Controls.Add(this.oKButton);
             this.startGroupBox.Controls.Add(this.plusButton);
-            this.startGroupBox.Location = new System.Drawing.Point(339, 61);
-            this.startGroupBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.startGroupBox.Location = new System.Drawing.Point(452, 75);
+            this.startGroupBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.startGroupBox.Name = "startGroupBox";
-            this.startGroupBox.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.startGroupBox.Size = new System.Drawing.Size(395, 298);
+            this.startGroupBox.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.startGroupBox.Size = new System.Drawing.Size(527, 367);
             this.startGroupBox.TabIndex = 3;
             this.startGroupBox.TabStop = false;
             this.startGroupBox.Enter += new System.EventHandler(this.startGroupBox_Enter);
@@ -133,10 +141,10 @@
             this.minusButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.minusButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.minusButton.ForeColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.minusButton.Location = new System.Drawing.Point(68, 251);
-            this.minusButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.minusButton.Location = new System.Drawing.Point(91, 309);
+            this.minusButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.minusButton.Name = "minusButton";
-            this.minusButton.Size = new System.Drawing.Size(31, 26);
+            this.minusButton.Size = new System.Drawing.Size(41, 32);
             this.minusButton.TabIndex = 4;
             this.minusButton.Text = "-";
             this.minusButton.UseVisualStyleBackColor = false;
@@ -145,10 +153,9 @@
             // showEnduranceLabel
             // 
             this.showEnduranceLabel.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.showEnduranceLabel.Location = new System.Drawing.Point(95, 257);
-            this.showEnduranceLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.showEnduranceLabel.Location = new System.Drawing.Point(127, 316);
             this.showEnduranceLabel.Name = "showEnduranceLabel";
-            this.showEnduranceLabel.Size = new System.Drawing.Size(39, 19);
+            this.showEnduranceLabel.Size = new System.Drawing.Size(52, 23);
             this.showEnduranceLabel.TabIndex = 3;
             this.showEnduranceLabel.Text = "3";
             this.showEnduranceLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -156,10 +163,9 @@
             // EnduranceLabel
             // 
             this.EnduranceLabel.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.EnduranceLabel.Location = new System.Drawing.Point(86, 228);
-            this.EnduranceLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.EnduranceLabel.Location = new System.Drawing.Point(115, 281);
             this.EnduranceLabel.Name = "EnduranceLabel";
-            this.EnduranceLabel.Size = new System.Drawing.Size(62, 19);
+            this.EnduranceLabel.Size = new System.Drawing.Size(83, 23);
             this.EnduranceLabel.TabIndex = 2;
             this.EnduranceLabel.Text = "Endurance:";
             // 
@@ -169,10 +175,10 @@
             this.oKButton.FlatAppearance.BorderColor = System.Drawing.Color.LightGray;
             this.oKButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.oKButton.ForeColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.oKButton.Location = new System.Drawing.Point(314, 249);
-            this.oKButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.oKButton.Location = new System.Drawing.Point(419, 306);
+            this.oKButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.oKButton.Name = "oKButton";
-            this.oKButton.Size = new System.Drawing.Size(56, 28);
+            this.oKButton.Size = new System.Drawing.Size(75, 34);
             this.oKButton.TabIndex = 1;
             this.oKButton.Text = "PLAY";
             this.oKButton.UseVisualStyleBackColor = false;
@@ -186,29 +192,82 @@
             this.plusButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.plusButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.plusButton.ForeColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.plusButton.Location = new System.Drawing.Point(131, 251);
-            this.plusButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.plusButton.Location = new System.Drawing.Point(175, 309);
+            this.plusButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.plusButton.Name = "plusButton";
-            this.plusButton.Size = new System.Drawing.Size(33, 26);
+            this.plusButton.Size = new System.Drawing.Size(44, 32);
             this.plusButton.TabIndex = 0;
             this.plusButton.Text = "+";
             this.plusButton.UseVisualStyleBackColor = false;
             this.plusButton.Click += new System.EventHandler(this.plusButton_Click);
             // 
+            // label1
+            // 
+            this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label1.ForeColor = System.Drawing.SystemColors.InactiveBorder;
+            this.label1.Location = new System.Drawing.Point(27, 314);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(72, 23);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "Nation";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label2
+            // 
+            this.label2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.label2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label2.ForeColor = System.Drawing.SystemColors.InactiveBorder;
+            this.label2.Location = new System.Drawing.Point(105, 314);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(94, 23);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "Endurance";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label3
+            // 
+            this.label3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.label3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label3.ForeColor = System.Drawing.SystemColors.InactiveBorder;
+            this.label3.Location = new System.Drawing.Point(205, 314);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(55, 23);
+            this.label3.TabIndex = 6;
+            this.label3.Text = "Shots";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label4
+            // 
+            this.label4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.label4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label4.ForeColor = System.Drawing.SystemColors.InactiveBorder;
+            this.label4.Location = new System.Drawing.Point(266, 314);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(44, 23);
+            this.label4.TabIndex = 7;
+            this.label4.Text = "Kills";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // MapForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(1014, 585);
+            this.ClientSize = new System.Drawing.Size(1352, 720);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.startGroupBox);
             this.Controls.Add(this.warActivityLabel);
             this.Controls.Add(this.startAndStopButton);
             this.Controls.Add(this.statsListView);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "MapForm";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.MapForm_Load);
             this.ResizeEnd += new System.EventHandler(this.MapForm_ResizeEnd);
             this.ClientSizeChanged += new System.EventHandler(this.MapForm_ClientSizeChanged);
             this.startGroupBox.ResumeLayout(false);
@@ -231,6 +290,10 @@
         private System.Windows.Forms.Label showEnduranceLabel;
         private System.Windows.Forms.Label EnduranceLabel;
         private System.Windows.Forms.Button minusButton;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
     }
 }
 

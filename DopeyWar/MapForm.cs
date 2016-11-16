@@ -63,7 +63,9 @@ namespace DopeyWar
                 rowItem[1] = n.Endurance.ToString();
                 rowItem[2] = n.Shots.ToString();
                 rowItem[3] = n.Kills.ToString();
-                statsListView.Items.Add(new ListViewItem(rowItem));
+                var itemToAdd = new ListViewItem(rowItem);
+
+                statsListView.Items.Add(itemToAdd);
             }
         }
         private void ChangeActivityLabel (Nation attacker, Nation defender)
@@ -191,10 +193,12 @@ namespace DopeyWar
 
         private void statsListView_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //this.BackColor = Color.DarkBlue;
-            //BackColor = Color.DarkBlue;
-            //statsListView.BackColor = Color.DarkBlue;
-            //statsListView.ForeColor = Color.Coral;
+            
+        }
+
+        private void MapForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
