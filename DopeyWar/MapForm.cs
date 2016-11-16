@@ -44,12 +44,12 @@ namespace DopeyWar
             _orgFormSize = new Size(Size.Width, Size.Height); //Store the original form size
 
             _timer = new Timer();
-            _timer.Interval = 100;
+            _timer.Interval = 60;
             _timer.Tick += _timer_Tick;
 
             _scaleIsSet = false;
 
-            _path = new Point[17];
+            _path = new Point[33];
             _timerCounter = 0;
         }
         #region Events
@@ -73,10 +73,10 @@ namespace DopeyWar
                 
             }
 
-            if (_timerCounter >= 1 && _timerCounter <= 16)
+            if (_timerCounter >= 1 && _timerCounter <= 32)
                 DrawMissilePath();
             
-            if (_timerCounter == 17)
+            if (_timerCounter == 33)
             {
                 _bombSound = new SoundPlayer(@"..\..\Bomb_Exploding.wav");
                 _bombSound.Play();
@@ -91,7 +91,7 @@ namespace DopeyWar
 
             _timerCounter++;
 
-            if (_timerCounter > 30)
+            if (_timerCounter > 50)
             {
                 if (_ww3.CheckIfWinner())
                 {

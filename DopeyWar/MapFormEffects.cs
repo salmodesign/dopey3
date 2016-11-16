@@ -34,27 +34,23 @@ namespace DopeyWar
             int last = _path.Length - 1;            
             int start = last / 2;                   //Start with index of midpoint between start and goal
             int current = start;                    
-            bool allPointsDefined = false;
 
             _path[0] = new Point(startX, startY);   //Set the starting point (index 0) in array
             _path[last] = _hittedTarget;            //Set the target point (last index) in array
 
-            while (!allPointsDefined)               //Loop sets the rest of the points in array
+            while (start != 0)                      //Loop sets the rest of the points in array
             {
                 //Make the current point to a midpoint between the closest defined points
                 _path[current] = GetRandMidpoint(_path[current - start], _path[current + start], offset);
 
-                current = current + 2*start; //Increase current index two times the start value
+                current = current + 2*start;        //Increase current index two times the start value
 
-                if (current >= last)         //If the end of array is reached
+                if (current >= last)                //If the end of array is reached
                 {
-                    start = start / 2;       //Set a new starting index
+                    start = start / 2;              //Set a new starting index
                     current = start;
                     offset = offset / 4;
                 }   
-
-                if (start == 0)              //At the end... start = start/2 will give start == 0
-                    allPointsDefined = true; //Means all points in array are filled!
             }
         }
 
