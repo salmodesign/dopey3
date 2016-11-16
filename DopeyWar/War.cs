@@ -18,7 +18,6 @@ namespace DopeyWar
         public War(int endurance)
         {
             _nationList = new List<Nation>();
-
             _nationList.Add(new Nation("Sweden", endurance, 551, 99));
             _nationList.Add(new Nation("USA", endurance, 242, 173));
             _nationList.Add(new Nation("Russia", endurance, 628, 99));

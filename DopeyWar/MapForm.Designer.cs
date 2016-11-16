@@ -40,7 +40,7 @@
             this.minusButton = new System.Windows.Forms.Button();
             this.showEnduranceLabel = new System.Windows.Forms.Label();
             this.EnduranceLabel = new System.Windows.Forms.Label();
-            this.oKButton = new System.Windows.Forms.Button();
+            this.playButton = new System.Windows.Forms.Button();
             this.plusButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -61,7 +61,7 @@
             this.startAndStopButton.TabIndex = 0;
             this.startAndStopButton.Text = "Start war";
             this.startAndStopButton.UseVisualStyleBackColor = false;
-            this.startAndStopButton.Click += new System.EventHandler(this.button1_Click);
+            this.startAndStopButton.Click += new System.EventHandler(this.startAndStopButton_Click);
             // 
             // statsListView
             // 
@@ -122,7 +122,7 @@
             this.startGroupBox.Controls.Add(this.minusButton);
             this.startGroupBox.Controls.Add(this.showEnduranceLabel);
             this.startGroupBox.Controls.Add(this.EnduranceLabel);
-            this.startGroupBox.Controls.Add(this.oKButton);
+            this.startGroupBox.Controls.Add(this.playButton);
             this.startGroupBox.Controls.Add(this.plusButton);
             this.startGroupBox.Location = new System.Drawing.Point(452, 75);
             this.startGroupBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -168,20 +168,20 @@
             this.EnduranceLabel.TabIndex = 2;
             this.EnduranceLabel.Text = "Endurance:";
             // 
-            // oKButton
+            // playButton
             // 
-            this.oKButton.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.oKButton.FlatAppearance.BorderColor = System.Drawing.Color.LightGray;
-            this.oKButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.oKButton.ForeColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.oKButton.Location = new System.Drawing.Point(419, 306);
-            this.oKButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.oKButton.Name = "oKButton";
-            this.oKButton.Size = new System.Drawing.Size(75, 34);
-            this.oKButton.TabIndex = 1;
-            this.oKButton.Text = "PLAY";
-            this.oKButton.UseVisualStyleBackColor = false;
-            this.oKButton.Click += new System.EventHandler(this.oKButton_Click);
+            this.playButton.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.playButton.FlatAppearance.BorderColor = System.Drawing.Color.LightGray;
+            this.playButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.playButton.ForeColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.playButton.Location = new System.Drawing.Point(419, 306);
+            this.playButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.playButton.Name = "playButton";
+            this.playButton.Size = new System.Drawing.Size(75, 34);
+            this.playButton.TabIndex = 1;
+            this.playButton.Text = "PLAY";
+            this.playButton.UseVisualStyleBackColor = false;
+            this.playButton.Click += new System.EventHandler(this.playButton_Click);
             // 
             // plusButton
             // 
@@ -266,8 +266,6 @@
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "MapForm";
             this.Text = "Form1";
-            this.Load += new System.EventHandler(this.MapForm_Load);
-            this.ResizeEnd += new System.EventHandler(this.MapForm_ResizeEnd);
             this.ClientSizeChanged += new System.EventHandler(this.MapForm_ClientSizeChanged);
             this.startGroupBox.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -281,7 +279,7 @@
         private System.Windows.Forms.Label warActivityLabel;
         private System.Windows.Forms.GroupBox startGroupBox;
         private System.Windows.Forms.Button plusButton;
-        private System.Windows.Forms.Button oKButton;
+        private System.Windows.Forms.Button playButton;
         private System.Windows.Forms.ColumnHeader columnNation;
         private System.Windows.Forms.ColumnHeader columnEndurance;
         private System.Windows.Forms.ColumnHeader columnShots;
