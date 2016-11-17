@@ -21,7 +21,10 @@ namespace DopeyWar
         private War _ww3;
         private Size _orgFormSize;
         private Timer _timer;
-        
+        private List <Label> _maplabels;
+
+        private Nation _norge;//for test
+
         public MapForm()
         {
             InitializeComponent();
@@ -39,11 +42,16 @@ namespace DopeyWar
             _path = new Point[33];
 
             _programIsfinished = false;
+
+            _maplabels = new List <Label>();
+
+   
         }
         #region Events
 
         private void startAndStopButton_Click(object sender, EventArgs e)
         {
+            
             StartAndStop();
         }
         
@@ -110,8 +118,12 @@ namespace DopeyWar
         {
             startGroupBox.Visible = false;
             startAndStopButton.Enabled = true;
-            _ww3 = new War(_startEndurance);
+            _ww3 = new War(_startEndurance);  
             UpDateStatsList(_ww3.GetSortedList());
+
+              
+            foreach (var item in Scaling.GetInstance().AllScalebleObjects())
+                CreateMapLabel(item);
         }
         #endregion Events
 
@@ -121,6 +133,10 @@ namespace DopeyWar
             if (!_scaleIsSet)
             {
                 Scaling.GetInstance().ApplyUserScaling(_orgFormSize.Width, Size.Width, _orgFormSize.Height, Size.Height);
+
+                foreach (var item in Scaling.GetInstance().AllScalebleObjects())
+                    UpdateMapLabel(item);
+
                 DisableFormResizing();
                 _scaleIsSet = true;
             }
@@ -156,6 +172,30 @@ namespace DopeyWar
                 var itemToAdd = new ListViewItem(rowItem);
 
                 statsListView.Items.Add(itemToAdd);
+            }
+        }
+
+
+        private void CreateMapLabel (IScaleable obj) //for test
+        {
+            Controls.Add(
+                new Label {
+                    Name = "MapObj" + obj.ToString(),
+                    Location = new Point(obj.PosX, obj.PosY),
+                    AutoSize = true,
+                    ForeColor = Color.Ivory,
+                    BackColor = Color.Transparent,
+                    Text = obj.ToString(),
+        });
+            
+        }
+
+        private void UpdateMapLabel (IScaleable obj) //for test
+        {
+            Control [] MapLabels = Controls.Find("MapObj" + obj.ToString(), true); //BYT TILL NAME?!
+            for (int i=0; i < MapLabels.Length; i++)
+            {
+                MapLabels[i].Location = new Point(obj.PosX, obj.PosY);
             }
         }
 

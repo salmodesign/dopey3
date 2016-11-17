@@ -53,5 +53,10 @@ namespace DopeyWar
                 obj.PosY = (int)(obj.PosY * _factorY); //New values for Y-axis by factor multiplying
             }
         }
+
+        public List<IScaleable> AllScalebleObjects ()
+        {
+            return _scaleableObjects;
+        }
     }
 }
