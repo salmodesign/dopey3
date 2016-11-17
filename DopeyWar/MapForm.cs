@@ -13,29 +13,14 @@ namespace DopeyWar
 {
     public partial class MapForm : Form
     {
-        private War _ww3;
-
-        private Size _orgFormSize;
-
-        private Timer _timer;
-
         private bool _scaleIsSet;
-
         private bool _programIsfinished = false;
+        private int _startEndurance;
+        private int _timerCounter;
 
-        private int _endurance = 3;
-
-        private SoundPlayer _anthemSound;
-
-        private PictureBox _gifPB;
-
-        private SoundPlayer _rocketSound;
-
-        private SoundPlayer _bombSound;
-
-        private bool _isRocketSoundActive;
-
-        private bool _isBombSoundActive;
+        private War _ww3;
+        private Size _orgFormSize;
+        private Timer _timer;
         
         public MapForm()
         {
@@ -46,11 +31,14 @@ namespace DopeyWar
             _timer = new Timer();
             _timer.Interval = 60;
             _timer.Tick += _timer_Tick;
+            _timerCounter = 0;
 
             _scaleIsSet = false;
+            _startEndurance = 3;
 
             _path = new Point[33];
-            _timerCounter = 0;
+
+            _programIsfinished = false;
         }
         #region Events
 
@@ -66,11 +54,7 @@ namespace DopeyWar
                 _ww3.CreateAttack();
                 warActivityLabel.Text = _ww3.Attacker + " attacks " + _ww3.Defender;
                 CreateMissilePath(_ww3.Attacker, _ww3.Defender);
-                _rocketSound = new SoundPlayer(@"..\..\Buster_Missle.wav");
-                _rocketSound.Play();
-                _isRocketSoundActive = true;
-                _isBombSoundActive = false;
-                
+                PlayRocketSound();
             }
 
             if (_timerCounter >= 1 && _timerCounter <= 32)
@@ -78,20 +62,15 @@ namespace DopeyWar
             
             if (_timerCounter == 33)
             {
-                _bombSound = new SoundPlayer(@"..\..\Bomb_Exploding.wav");
-                _bombSound.Play();
-                _isRocketSoundActive = false;
-                _isBombSoundActive = true;
-
+                PlayBombSound();
                 DrawHittedTarget();
                 UpDateStatsList(_ww3.GetSortedList());
                 if (_ww3.Defender.Endurance == 0)
                     DisplayDefeated(_ww3.Defender);
             }
-
             _timerCounter++;
 
-            if (_timerCounter > 50)
+            if (_timerCounter > 60)
             {
                 if (_ww3.CheckIfWinner())
                 {
@@ -114,16 +93,16 @@ namespace DopeyWar
 
         private void plusButton_Click(object sender, EventArgs e)
         {
-            _endurance++;
-            showEnduranceLabel.Text = _endurance.ToString();
+            _startEndurance++;
+            showEnduranceLabel.Text = _startEndurance.ToString();
         }
 
         private void minusButton_Click(object sender, EventArgs e)
         {
-            if (_endurance > 1)
+            if (_startEndurance > 1)
             {
-                _endurance--;
-                showEnduranceLabel.Text = _endurance.ToString();
+                _startEndurance--;
+                showEnduranceLabel.Text = _startEndurance.ToString();
             }
         }
 
@@ -131,17 +110,17 @@ namespace DopeyWar
         {
             startGroupBox.Visible = false;
             startAndStopButton.Enabled = true;
-            _ww3 = new War(_endurance);
+            _ww3 = new War(_startEndurance);
             UpDateStatsList(_ww3.GetSortedList());
         }
         #endregion Events
 
         #region Methods
-        public void StartAndStop()
+        private void StartAndStop()
         {
             if (!_scaleIsSet)
             {
-                Scaling.ApplyUserScaling(_orgFormSize.Width, Size.Width, _orgFormSize.Height, Size.Height);
+                Scaling.GetInstance().ApplyUserScaling(_orgFormSize.Width, Size.Width, _orgFormSize.Height, Size.Height);
                 DisableFormResizing();
                 _scaleIsSet = true;
             }
@@ -163,7 +142,7 @@ namespace DopeyWar
             }
         }
 
-        public void UpDateStatsList(List<Nation> ListToShow)
+        private void UpDateStatsList(List<Nation> ListToShow)
         {
             statsListView.Items.Clear();
 
@@ -178,31 +157,6 @@ namespace DopeyWar
 
                 statsListView.Items.Add(itemToAdd);
             }
-        }
-
-        private void ChangeActivityLabel(Nation attacker, Nation defender)
-        {
-            warActivityLabel.Text = attacker + " attacks " + defender;
-        }
-
-        public void DisplayDefeated(Nation defender)
-        {
-            Point defenderPoint = new Point(defender.PositionX, defender.PositionY);
-            Controls.Add(new Label{Location = defenderPoint, AutoSize = true, BackColor = Color.Black, ForeColor = Color.Red, Text = defender + "\nDEFEATED"});
-
-            warActivityLabel.Text += "\n" + defender + " defeated!";
-
-            Point nextToDefenderPoint = new Point(defenderPoint.X - 30, defenderPoint.Y - 30);
-            _gifPB = new PictureBox()
-            {
-                Location = nextToDefenderPoint,
-                Size = new Size(40, 40),
-                ImageLocation = @"..\..\bomb.gif",
-                BackColor = Color.Transparent,
-                SizeMode = PictureBoxSizeMode.StretchImage
-            };
-            Controls.Add(_gifPB);
-            _gifPB.SendToBack();
         }
 
         private void DisableFormResizing()

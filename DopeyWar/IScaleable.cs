@@ -8,7 +8,7 @@ namespace DopeyWar
 {
     public interface IScaleable
     {
-        int PositionX { get; set; }
-        int PositionY { get; set; }
+        int PosX { get; set; }
+        int PosY { get; set; }
     }
 }

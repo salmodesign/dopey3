@@ -13,8 +13,8 @@ namespace DopeyWar
         private int _shots;
         private int _kills;
 
-        public int PositionX { get; set; }
-        public int PositionY { get; set; }
+        public int PosX { get; set; }
+        public int PosY { get; set; }
         public int Endurance { get { return _endurance; }}
         public int Shots { get { return _shots; } }
         public int Kills { get { return _kills; } }
@@ -25,10 +25,10 @@ namespace DopeyWar
             _endurance = endurance;
             _shots = 0;
             _kills = 0;
-            PositionX = x;
-            PositionY = y;
+            PosX = x;
+            PosY = y;
 
-            Scaling.Add(this);
+            Scaling.GetInstance().Add(this);
         }
 
         public override string ToString()

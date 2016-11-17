@@ -13,29 +13,30 @@ namespace DopeyWar
 {
     public partial class MapForm
     {
-        private Point[] _path;
+        private bool _isRocketSoundActive;
+        private bool _isBombSoundActive;
+
         private Point _hittedTarget;
-        private int _timerCounter;
+        private Point[] _path;
 
-        private void CreateMissilePath(Nation attacker, Nation defender)
+        private SoundPlayer _anthemSound;
+        private SoundPlayer _rocketSound;
+        private SoundPlayer _bombSound;
+
+        private void CreateMissilePath(Nation begin, Nation end)
         {
-            int startX = attacker.PositionX;
-            int startY = attacker.PositionY;
-            int goalX = defender.PositionX;
-            int goalY = defender.PositionY;
+            double distance = Math.Sqrt((Math.Pow(begin.PosX - end.PosX, 2) + Math.Pow(begin.PosY - end.PosY, 2)));
 
-            double distance = Math.Sqrt((Math.Pow(startX - goalX, 2) + Math.Pow(startY - goalY, 2)));
+            int offset = (int)(Scaling.GetInstance().FactorX * 12); //Offset is depending on scaling!
 
-            int offset = (int)(Scaling.FactorX * 12); //Offset is depending on scaling!
-
-            _hittedTarget = GetHittedRandomTarget(goalX, goalY, offset);
+            _hittedTarget = GetHittedRandomTarget(end.PosX, end.PosY, offset);
 
             offset *= (int)(distance * 0.01);       //Offset is now depending on distance and scaling!
             int last = _path.Length - 1;            
             int start = last / 2;                   //Start with index of midpoint between start and goal
             int current = start;                    
 
-            _path[0] = new Point(startX, startY);   //Set the starting point (index 0) in array
+            _path[0] = new Point(begin.PosX, begin.PosY);//Set the starting point (index 0) in array
             _path[last] = _hittedTarget;            //Set the target point (last index) in array
 
             while (start != 0)                      //Loop sets the rest of the points in array
@@ -70,18 +71,33 @@ namespace DopeyWar
             return new Point(x + rno.Next(-offset, 0), y + rno.Next(-offset, 0));
         }
 
+        private void PlayRocketSound()
+        {
+            _rocketSound = new SoundPlayer(@"..\..\Buster_Missle.wav");
+            _rocketSound.Play();
+            _isRocketSoundActive = true;
+            _isBombSoundActive = false;
+        }
+
+        private void PlayBombSound()
+        {
+            _bombSound = new SoundPlayer(@"..\..\Bomb_Exploding.wav");
+            _bombSound.Play();
+            _isRocketSoundActive = false;
+            _isBombSoundActive = true;
+        }
+
         private void DrawMissilePath()
         {
             Graphics fg = CreateGraphics();
             fg.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality; //Added for extra quality!
             fg.DrawCurve(new Pen(Color.LightBlue, 3), _path, 0, _timerCounter, 0.5F);
             fg.Dispose();
-
         }
 
         private void DrawHittedTarget()
         {
-            int offset = (int)(Scaling.FactorX * 12);
+            int offset = (int)(Scaling.GetInstance().FactorX * 12);
             Pen myPen;
             Graphics fg = CreateGraphics();
             fg.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality; //Added for extra quality!
@@ -94,8 +110,8 @@ namespace DopeyWar
 
         private void CelebrateWinner(Nation winner)
         {
-            Point winnerPoint = new Point(winner.PositionX, winner.PositionY);
-            Point labelWinnerPoint = new Point(winner.PositionX, winner.PositionY - 25);
+            Point winnerPoint = new Point(winner.PosX, winner.PosY);
+            Point labelWinnerPoint = new Point(winner.PosX, winner.PosY - 25);
 
             Controls.Add(new Label { Location = labelWinnerPoint, AutoSize = true, BackColor = Color.Black, ForeColor = Color.Green, Text = winner + "\nWINNER" });
 
@@ -113,6 +129,26 @@ namespace DopeyWar
             pb.BringToFront();
             _anthemSound = new SoundPlayer(sound);
             _anthemSound.Play();
+        }
+
+        private void DisplayDefeated(Nation defender)
+        {
+            Point defenderPoint = new Point(defender.PosX, defender.PosY);
+            Controls.Add(new Label { Location = defenderPoint, AutoSize = true, BackColor = Color.Black, ForeColor = Color.Red, Text = defender + "\nDEFEATED" });
+
+            warActivityLabel.Text += "\n" + defender + " defeated!";
+
+            Point nextToDefenderPoint = new Point(defenderPoint.X - 30, defenderPoint.Y - 30);
+            PictureBox gifPB = new PictureBox()
+            {
+                Location = nextToDefenderPoint,
+                Size = new Size(40, 40),
+                ImageLocation = @"..\..\bomb.gif",
+                BackColor = Color.Transparent,
+                SizeMode = PictureBoxSizeMode.StretchImage
+            };
+            Controls.Add(gifPB);
+            gifPB.SendToBack();
         }
     }
 }

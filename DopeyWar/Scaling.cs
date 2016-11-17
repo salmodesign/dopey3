@@ -6,34 +6,51 @@ using System.Threading.Tasks;
 
 namespace DopeyWar
 {
-    public abstract class Scaling
+    public sealed class Scaling
     {
-        static private List<IScaleable> _scaleableObjects = new List<IScaleable>();
-        static private double _factorX;
-        static private double _factorY;
+        private List<IScaleable> _scaleableObjects;
+        private double _factorX;
+        private double _factorY;
 
-        static public double FactorX { get { return _factorX; } }
-        static public double FactorY { get { return _factorY; } }
+        private static Scaling instance = null;
+
+        public double FactorX { get { return _factorX; } }
+        public double FactorY { get { return _factorY; } }
+
+        //Singleton pattern...Only one instance, created inside the class
+        private Scaling()
+        {
+            _scaleableObjects = new List<IScaleable>(); //Holds all scaleable objects
+        }
+
+        public static Scaling GetInstance()
+        {
+            if (instance == null)
+            {
+                instance = new Scaling();
+            }
+
+            return instance;
+        }
 
         /// <summary>
         /// Adds the object so that scaling factors can be applied.
         /// </summary>
         /// <param name="obj">Objects that implements the IScaleable interface.</param>
-
-        public static void Add(IScaleable obj)
+        public void Add(IScaleable obj)
         {
             _scaleableObjects.Add(obj);
         }
 
-        public static void ApplyUserScaling(int xOrg, int xNew, int yOrg, int yNew)
+        public void ApplyUserScaling(int xOrg, int xNew, int yOrg, int yNew)
         {
             _factorX = xNew / (double)xOrg;   //Calculates the changes in form size as a factor for X 
             _factorY = yNew / (double)yOrg;   //and the Y-axis
 
             foreach (IScaleable obj in _scaleableObjects)       //Apply changes to ALL scaleable objects
             {
-                obj.PositionX = (int)(obj.PositionX * _factorX); //New values for X-axis by factor multiplying
-                obj.PositionY = (int)(obj.PositionY * _factorY); //New values for Y-axis by factor multiplying
+                obj.PosX = (int)(obj.PosX * _factorX); //New values for X-axis by factor multiplying
+                obj.PosY = (int)(obj.PosY * _factorY); //New values for Y-axis by factor multiplying
             }
         }
     }
