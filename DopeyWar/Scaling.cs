@@ -20,6 +20,8 @@ namespace DopeyWar
         //Singleton pattern...Only one instance, created inside the class
         private Scaling()
         {
+            _factorX = 1;
+            _factorY = 1;
             _scaleableObjects = new List<IScaleable>(); //Holds all scaleable objects
         }
 
@@ -44,13 +46,18 @@ namespace DopeyWar
 
         public void ApplyUserScaling(int xOrg, int xNew, int yOrg, int yNew)
         {
+            double initialFactorX = _factorX; //Used to calculate the original X position for each object
+            double initialFactorY = _factorY; //Used to calculate the original Y position for each object
+
             _factorX = xNew / (double)xOrg;   //Calculates the changes in form size as a factor for X 
             _factorY = yNew / (double)yOrg;   //and the Y-axis
 
             foreach (IScaleable obj in _scaleableObjects)       //Apply changes to ALL scaleable objects
             {
-                obj.PosX = (int)(obj.PosX * _factorX); //New values for X-axis by factor multiplying
-                obj.PosY = (int)(obj.PosY * _factorY); //New values for Y-axis by factor multiplying
+                int initialPosX = (int)(obj.PosX / initialFactorX); 
+                int initialPosY = (int)(obj.PosY / initialFactorY);
+                obj.PosX = (int)(initialPosX * _factorX); //New values for X-axis by factor multiplying
+                obj.PosY = (int)(initialPosY * _factorY); //New values for Y-axis by factor multiplying
             }
         }
 

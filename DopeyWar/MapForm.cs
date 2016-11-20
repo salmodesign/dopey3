@@ -23,8 +23,6 @@ namespace DopeyWar
         private Timer _timer;
         private List <Label> _maplabels;
 
-        private Nation _norge;//for test
-
         public MapForm()
         {
             InitializeComponent();
@@ -95,8 +93,11 @@ namespace DopeyWar
 
         private void MapForm_ClientSizeChanged(object sender, EventArgs e)
         {
-            startGroupBox.Left = (this.ClientSize.Width - startGroupBox.Width) / 2;
-            startGroupBox.Top = (this.ClientSize.Height - startGroupBox.Height) / 2;
+            if (startGroupBox.Visible == true)
+            {
+                startGroupBox.Left = (this.ClientSize.Width - startGroupBox.Width) / 2;
+                startGroupBox.Top = (this.ClientSize.Height - startGroupBox.Height) / 2;
+            }
         }
 
         private void plusButton_Click(object sender, EventArgs e)
@@ -120,7 +121,6 @@ namespace DopeyWar
             startAndStopButton.Enabled = true;
             _ww3 = new War(_startEndurance);  
             UpDateStatsList(_ww3.GetSortedList());
-
               
             foreach (var item in Scaling.GetInstance().AllScalebleObjects())
                 CreateMapLabel(item);
@@ -134,8 +134,8 @@ namespace DopeyWar
             {
                 Scaling.GetInstance().ApplyUserScaling(_orgFormSize.Width, Size.Width, _orgFormSize.Height, Size.Height);
 
-                foreach (var item in Scaling.GetInstance().AllScalebleObjects())
-                    UpdateMapLabel(item);
+                HideAllMapLabels();
+
 
                 DisableFormResizing();
                 _scaleIsSet = true;
@@ -186,7 +186,7 @@ namespace DopeyWar
                     ForeColor = Color.Ivory,
                     BackColor = Color.Transparent,
                     Text = obj.ToString(),
-        });
+            });
             
         }
 
@@ -198,6 +198,20 @@ namespace DopeyWar
                 MapLabels[i].Location = new Point(obj.PosX, obj.PosY);
             }
         }
+        private void HideAllMapLabels()
+        {
+            foreach (var item in Scaling.GetInstance().AllScalebleObjects())
+                HideMapLabel(item);
+        }
+
+        private void HideMapLabel(IScaleable obj) //for test
+        {
+            Control[] MapLabels = Controls.Find("MapObj" + obj.ToString(), true); //BYT TILL NAME?!
+            for (int i = 0; i < MapLabels.Length; i++)
+            {
+                MapLabels[i].Visible = false;
+            }
+        }
 
         private void DisableFormResizing()
         {
@@ -205,7 +219,22 @@ namespace DopeyWar
             MinimizeBox = false;
             FormBorderStyle = FormBorderStyle.FixedSingle;
         }
-                
+
+        private void MapForm_ResizeEnd(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MapForm_SizeChanged(object sender, EventArgs e)
+        {
+                        Scaling.GetInstance().ApplyUserScaling(_orgFormSize.Width, Size.Width, _orgFormSize.Height, Size.Height);
+
+            foreach (var item in Scaling.GetInstance().AllScalebleObjects())
+                UpdateMapLabel(item);
+        }
+
+
+
         //protected override void OnMouseDoubleClick(MouseEventArgs e)
         //{
         //    base.OnMouseDoubleClick(e);

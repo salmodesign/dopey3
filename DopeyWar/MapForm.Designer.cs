@@ -55,7 +55,7 @@
             this.startAndStopButton.Enabled = false;
             this.startAndStopButton.ForeColor = System.Drawing.SystemColors.InactiveBorder;
             this.startAndStopButton.Location = new System.Drawing.Point(11, 538);
-            this.startAndStopButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.startAndStopButton.Margin = new System.Windows.Forms.Padding(2);
             this.startAndStopButton.Name = "startAndStopButton";
             this.startAndStopButton.Size = new System.Drawing.Size(236, 36);
             this.startAndStopButton.TabIndex = 0;
@@ -75,7 +75,7 @@
             this.statsListView.ForeColor = System.Drawing.SystemColors.InactiveBorder;
             this.statsListView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.statsListView.Location = new System.Drawing.Point(12, 269);
-            this.statsListView.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.statsListView.Margin = new System.Windows.Forms.Padding(4);
             this.statsListView.Name = "statsListView";
             this.statsListView.Size = new System.Drawing.Size(235, 264);
             this.statsListView.TabIndex = 1;
@@ -124,9 +124,9 @@
             this.startGroupBox.Controls.Add(this.playButton);
             this.startGroupBox.Controls.Add(this.plusButton);
             this.startGroupBox.Location = new System.Drawing.Point(325, 139);
-            this.startGroupBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.startGroupBox.Margin = new System.Windows.Forms.Padding(2);
             this.startGroupBox.Name = "startGroupBox";
-            this.startGroupBox.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.startGroupBox.Padding = new System.Windows.Forms.Padding(2);
             this.startGroupBox.Size = new System.Drawing.Size(395, 298);
             this.startGroupBox.TabIndex = 3;
             this.startGroupBox.TabStop = false;
@@ -140,7 +140,7 @@
             this.minusButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.minusButton.ForeColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.minusButton.Location = new System.Drawing.Point(68, 251);
-            this.minusButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.minusButton.Margin = new System.Windows.Forms.Padding(2);
             this.minusButton.Name = "minusButton";
             this.minusButton.Size = new System.Drawing.Size(31, 26);
             this.minusButton.TabIndex = 4;
@@ -176,7 +176,7 @@
             this.playButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.playButton.ForeColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.playButton.Location = new System.Drawing.Point(314, 249);
-            this.playButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.playButton.Margin = new System.Windows.Forms.Padding(2);
             this.playButton.Name = "playButton";
             this.playButton.Size = new System.Drawing.Size(56, 28);
             this.playButton.TabIndex = 1;
@@ -193,7 +193,7 @@
             this.plusButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.plusButton.ForeColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.plusButton.Location = new System.Drawing.Point(131, 251);
-            this.plusButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.plusButton.Margin = new System.Windows.Forms.Padding(2);
             this.plusButton.Name = "plusButton";
             this.plusButton.Size = new System.Drawing.Size(33, 26);
             this.plusButton.TabIndex = 0;
@@ -268,10 +268,13 @@
             this.Controls.Add(this.warActivityLabel);
             this.Controls.Add(this.startAndStopButton);
             this.Controls.Add(this.statsListView);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.DoubleBuffered = true;
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "MapForm";
-            this.Text = "Form1";
+            this.Text = "The Dopey World War";
+            this.ResizeEnd += new System.EventHandler(this.MapForm_ResizeEnd);
             this.ClientSizeChanged += new System.EventHandler(this.MapForm_ClientSizeChanged);
+            this.SizeChanged += new System.EventHandler(this.MapForm_SizeChanged);
             this.startGroupBox.ResumeLayout(false);
             this.ResumeLayout(false);
 
