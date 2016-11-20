@@ -28,6 +28,9 @@ namespace DopeyWar
             _nationList.Add(new Nation("Australia", endurance, 907, 387));
             _nationList.Add(new Nation("United Kingdom", endurance, 503, 122));
             _nationList.Add(new Nation("Iraq", endurance, 636, 175));
+
+            new Ocean("Pacific Ocean", 890, 220); //For demo purpose (Scaling feature)
+            new Ocean("Atlantic Ocean", 430, 300);
         }
 
         public List<Nation> GetSortedList()

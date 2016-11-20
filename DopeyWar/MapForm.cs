@@ -134,10 +134,7 @@ namespace DopeyWar
         {
             if (!_scaleIsSet)
             {
-                Scaling.GetInstance().ApplyUserScaling(_orgFormSize.Width, Size.Width, _orgFormSize.Height, Size.Height);
-
                 HideAllMapLabels();
-
 
                 DisableFormResizing();
                 _scaleIsSet = true;
@@ -182,12 +179,12 @@ namespace DopeyWar
         {
             Controls.Add(
                 new Label {
-                    Name = "MapObj" + obj.ToString(),
+                    Name = "MapObj" + obj.Name,
                     AutoSize = true,
                     Location = new Point(obj.PosX, obj.PosY),
                     ForeColor = Color.Ivory,
                     BackColor = Color.Transparent,
-                    Text = obj.ToString(),
+                    Text = obj.Name,
             });    
         }
 
@@ -199,9 +196,9 @@ namespace DopeyWar
                 UpdateMapLabel(item);
         }
 
-        private void UpdateMapLabel (IScaleable obj) //for test
+        private void UpdateMapLabel (IScaleable obj)
         {
-            Control [] MapLabels = Controls.Find("MapObj" + obj.ToString(), true); //BYT TILL NAME?!
+            Control [] MapLabels = Controls.Find("MapObj" + obj.Name, true);
             for (int i=0; i < MapLabels.Length; i++)
             {
                 MapLabels[i].Location = new Point(obj.PosX, obj.PosY);
@@ -216,7 +213,7 @@ namespace DopeyWar
 
         private void HideMapLabel(IScaleable obj) //for test
         {
-            Control[] MapLabels = Controls.Find("MapObj" + obj.ToString(), true); //BYT TILL NAME?!
+            Control[] MapLabels = Controls.Find("MapObj" + obj.Name, true); 
             for (int i = 0; i < MapLabels.Length; i++)
             {
                 MapLabels[i].Visible = false;
