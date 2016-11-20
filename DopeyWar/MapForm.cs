@@ -128,6 +128,28 @@ namespace DopeyWar
 
             UpdateAllMapLabels();
         }
+
+        private void MapForm_ResizeEnd(object sender, EventArgs e)
+        {
+            UpdateAllMapLabels();
+        }
+
+        private void MapForm_SizeChanged(object sender, EventArgs e)
+        {
+            if (WindowState != _lastWindowState) // When window state changes (ex. maiximized)
+            {
+                if (WindowState == FormWindowState.Maximized || WindowState == FormWindowState.Normal)
+                {
+                    UpdateAllMapLabels();
+                }
+                _lastWindowState = WindowState;
+            }
+        }
+
+        private void mapLabelsCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            UpdateAllMapLabels();
+        }
         #endregion Events
 
         #region Methods
@@ -176,7 +198,6 @@ namespace DopeyWar
             }
         }
 
-
         private void CreateMapLabel (IScaleable obj) //for test
         {
             Controls.Add(
@@ -211,21 +232,6 @@ namespace DopeyWar
             }
         }
 
-        private void HideAllMapLabels()
-        {
-            foreach (var item in Scaling.GetInstance().AllScalebleObjects())
-                HideMapLabel(item);
-        }
-
-        private void HideMapLabel(IScaleable obj) //for test
-        {
-            Control[] MapLabels = Controls.Find("MapObj" + obj.Name, true); 
-            for (int i = 0; i < MapLabels.Length; i++)
-            {
-                MapLabels[i].Visible = false;
-            }
-        }
-
         private void FormResizeAllowed(bool isAllowed)
         {
             if (isAllowed)
@@ -241,37 +247,6 @@ namespace DopeyWar
                 FormBorderStyle = FormBorderStyle.FixedSingle;
             }
         }
-
-        private void MapForm_ResizeEnd(object sender, EventArgs e)
-        {
-            UpdateAllMapLabels();
-        }
-
-        private void MapForm_SizeChanged(object sender, EventArgs e)
-        {        
-            if (WindowState != _lastWindowState) // When window state changes (ex. maiximized)
-            {
-                if (WindowState == FormWindowState.Maximized || WindowState == FormWindowState.Normal)
-                {
-                    UpdateAllMapLabels();
-                }
-                _lastWindowState = WindowState;
-            }
-        }
-
-        private void mapLabelsCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            UpdateAllMapLabels();
-        }
-
-
-
-        //protected override void OnMouseDoubleClick(MouseEventArgs e)
-        //{
-        //    base.OnMouseDoubleClick(e);
-        //    int x = e.X; int y = e.Y;
-        //    MessageBox.Show("x: " + x.ToString() + " " + "y: " + y.ToString());
-        //}
     }
 }
 #endregion Methods

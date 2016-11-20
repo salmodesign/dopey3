@@ -31,7 +31,6 @@ namespace DopeyWar
             {
                 instance = new Scaling();
             }
-
             return instance;
         }
 
