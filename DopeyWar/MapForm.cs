@@ -21,7 +21,10 @@ namespace DopeyWar
         private War _ww3;
         private Size _orgFormSize;
         private Timer _timer;
-        
+        private List <Label> _maplabels;
+
+        private FormWindowState _lastWindowState; //Used only to determine when form is being maximized
+
         public MapForm()
         {
             InitializeComponent();
@@ -39,11 +42,13 @@ namespace DopeyWar
             _path = new Point[33];
 
             _programIsfinished = false;
+
+            _maplabels = new List <Label>();
         }
         #region Events
 
         private void startAndStopButton_Click(object sender, EventArgs e)
-        {
+        {  
             StartAndStop();
         }
         
@@ -87,8 +92,11 @@ namespace DopeyWar
 
         private void MapForm_ClientSizeChanged(object sender, EventArgs e)
         {
-            startGroupBox.Left = (this.ClientSize.Width - startGroupBox.Width) / 2;
-            startGroupBox.Top = (this.ClientSize.Height - startGroupBox.Height) / 2;
+            if (startGroupBox.Visible == true)
+            {
+                startGroupBox.Left = (this.ClientSize.Width - startGroupBox.Width) / 2;
+                startGroupBox.Top = (this.ClientSize.Height - startGroupBox.Height) / 2;
+            }
         }
 
         private void plusButton_Click(object sender, EventArgs e)
@@ -110,8 +118,37 @@ namespace DopeyWar
         {
             startGroupBox.Visible = false;
             startAndStopButton.Enabled = true;
+            FormResizeAllowed(true);
+
             _ww3 = new War(_startEndurance);
             UpDateStatsList(_ww3.GetSortedList());
+              
+            foreach (var item in Scaling.GetInstance().AllScalebleObjects())
+                CreateMapLabel(item);
+
+            UpdateAllMapLabels();
+        }
+
+        private void MapForm_ResizeEnd(object sender, EventArgs e)
+        {
+            UpdateAllMapLabels();
+        }
+
+        private void MapForm_SizeChanged(object sender, EventArgs e)
+        {
+            if (WindowState != _lastWindowState) // When window state changes (ex. maiximized)
+            {
+                if (WindowState == FormWindowState.Maximized || WindowState == FormWindowState.Normal)
+                {
+                    UpdateAllMapLabels();
+                }
+                _lastWindowState = WindowState;
+            }
+        }
+
+        private void mapLabelsCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            UpdateAllMapLabels();
         }
         #endregion Events
 
@@ -120,8 +157,10 @@ namespace DopeyWar
         {
             if (!_scaleIsSet)
             {
-                Scaling.GetInstance().ApplyUserScaling(_orgFormSize.Width, Size.Width, _orgFormSize.Height, Size.Height);
-                DisableFormResizing();
+                mapLabelsCheckBox.Checked = false;
+                mapLabelsCheckBox.Enabled = false;
+                UpdateAllMapLabels();
+                FormResizeAllowed(false);
                 _scaleIsSet = true;
             }
             if (_timer.Enabled == false)
@@ -159,19 +198,55 @@ namespace DopeyWar
             }
         }
 
-        private void DisableFormResizing()
+        private void CreateMapLabel (IScaleable obj) //for test
         {
-            MaximizeBox = false;
-            MinimizeBox = false;
-            FormBorderStyle = FormBorderStyle.FixedSingle;
+            Controls.Add(
+                new Label {
+                    Name = "MapObj" + obj.Name,
+                    AutoSize = true,
+                    Location = new Point(obj.PosX, obj.PosY),
+                    ForeColor = Color.Ivory,
+                    BackColor = Color.Transparent,
+                    Text = obj.Name,
+            });    
         }
-                
-        //protected override void OnMouseDoubleClick(MouseEventArgs e)
-        //{
-        //    base.OnMouseDoubleClick(e);
-        //    int x = e.X; int y = e.Y;
-        //    MessageBox.Show("x: " + x.ToString() + " " + "y: " + y.ToString());
-        //}
+
+        private void UpdateAllMapLabels()
+        {
+            Scaling.GetInstance().ApplyUserScaling(_orgFormSize.Width, Size.Width, _orgFormSize.Height, Size.Height);
+
+            foreach (var item in Scaling.GetInstance().AllScalebleObjects())
+                UpdateMapLabel(item);
+        }
+
+        private void UpdateMapLabel (IScaleable obj)
+        {
+            Control [] MapLabels = Controls.Find("MapObj" + obj.Name, true);
+            for (int i=0; i < MapLabels.Length; i++)
+            {
+                MapLabels[i].Location = new Point(obj.PosX, obj.PosY);
+                if (mapLabelsCheckBox.Checked == true)
+                    MapLabels[i].Visible = true;
+                else
+                    MapLabels[i].Visible = false;
+            }
+        }
+
+        private void FormResizeAllowed(bool isAllowed)
+        {
+            if (isAllowed)
+            {
+                MaximizeBox = true;
+                MinimizeBox = true;
+                FormBorderStyle = FormBorderStyle.Sizable;
+            }
+            else
+            {
+                MaximizeBox = false;
+                MinimizeBox = false;
+                FormBorderStyle = FormBorderStyle.FixedSingle;
+            }
+        }
     }
 }
 #endregion Methods
