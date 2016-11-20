@@ -10,5 +10,6 @@ namespace DopeyWar
     {
         int PosX { get; set; }
         int PosY { get; set; }
+        string Name { get; }
     }
 }

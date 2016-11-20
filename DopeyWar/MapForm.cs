@@ -23,6 +23,8 @@ namespace DopeyWar
         private Timer _timer;
         private List <Label> _maplabels;
 
+        private FormWindowState _lastWindowState; //Used only to determine when form is being maximized
+
         public MapForm()
         {
             InitializeComponent();
@@ -181,13 +183,20 @@ namespace DopeyWar
             Controls.Add(
                 new Label {
                     Name = "MapObj" + obj.ToString(),
-                    Location = new Point(obj.PosX, obj.PosY),
                     AutoSize = true,
+                    Location = new Point(obj.PosX, obj.PosY),
                     ForeColor = Color.Ivory,
                     BackColor = Color.Transparent,
                     Text = obj.ToString(),
-            });
-            
+            });    
+        }
+
+        private void UpdateAllMapLabels()
+        {
+            Scaling.GetInstance().ApplyUserScaling(_orgFormSize.Width, Size.Width, _orgFormSize.Height, Size.Height);
+
+            foreach (var item in Scaling.GetInstance().AllScalebleObjects())
+                UpdateMapLabel(item);
         }
 
         private void UpdateMapLabel (IScaleable obj) //for test
@@ -198,6 +207,7 @@ namespace DopeyWar
                 MapLabels[i].Location = new Point(obj.PosX, obj.PosY);
             }
         }
+
         private void HideAllMapLabels()
         {
             foreach (var item in Scaling.GetInstance().AllScalebleObjects())
@@ -222,15 +232,19 @@ namespace DopeyWar
 
         private void MapForm_ResizeEnd(object sender, EventArgs e)
         {
-
+            UpdateAllMapLabels();
         }
 
         private void MapForm_SizeChanged(object sender, EventArgs e)
-        {
-                        Scaling.GetInstance().ApplyUserScaling(_orgFormSize.Width, Size.Width, _orgFormSize.Height, Size.Height);
-
-            foreach (var item in Scaling.GetInstance().AllScalebleObjects())
-                UpdateMapLabel(item);
+        {        
+            if (WindowState != _lastWindowState) // When window state changes (ex. maiximized)
+            {
+                if (WindowState == FormWindowState.Maximized || WindowState == FormWindowState.Normal)
+                {
+                    UpdateAllMapLabels();
+                }
+                _lastWindowState = WindowState;
+            }
         }
 
 

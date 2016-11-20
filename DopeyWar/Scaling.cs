@@ -54,8 +54,8 @@ namespace DopeyWar
 
             foreach (IScaleable obj in _scaleableObjects)       //Apply changes to ALL scaleable objects
             {
-                int initialPosX = (int)(obj.PosX / initialFactorX); 
-                int initialPosY = (int)(obj.PosY / initialFactorY);
+                int initialPosX = (int)(obj.PosX / initialFactorX + 0.5); 
+                int initialPosY = (int)(obj.PosY / initialFactorY + 0.5);
                 obj.PosX = (int)(initialPosX * _factorX); //New values for X-axis by factor multiplying
                 obj.PosY = (int)(initialPosY * _factorY); //New values for Y-axis by factor multiplying
             }
