@@ -270,6 +270,7 @@
             this.Controls.Add(this.statsListView);
             this.DoubleBuffered = true;
             this.Margin = new System.Windows.Forms.Padding(2);
+            this.MinimumSize = new System.Drawing.Size(1024, 500);
             this.Name = "MapForm";
             this.Text = "The Dopey World War";
             this.ResizeEnd += new System.EventHandler(this.MapForm_ResizeEnd);
