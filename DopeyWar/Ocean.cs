@@ -20,7 +20,7 @@ namespace DopeyWar
             PosX = x;
             PosY = y;
 
-            Scaling.GetInstance().Add(this);
+            Scaling.GetInstance().Add(this);        //Adds every new object to scaling control
         }
     }
 }

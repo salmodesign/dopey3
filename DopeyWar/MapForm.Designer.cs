@@ -46,6 +46,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.mapLabelsCheckBox = new System.Windows.Forms.CheckBox();
             this.startGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -253,13 +254,27 @@
             this.label4.Text = "Kills";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // mapLabelsCheckBox
+            // 
+            this.mapLabelsCheckBox.AutoSize = true;
+            this.mapLabelsCheckBox.BackColor = System.Drawing.Color.Transparent;
+            this.mapLabelsCheckBox.ForeColor = System.Drawing.SystemColors.ControlLight;
+            this.mapLabelsCheckBox.Location = new System.Drawing.Point(79, 225);
+            this.mapLabelsCheckBox.Name = "mapLabelsCheckBox";
+            this.mapLabelsCheckBox.Size = new System.Drawing.Size(102, 17);
+            this.mapLabelsCheckBox.TabIndex = 8;
+            this.mapLabelsCheckBox.Text = "View map labels";
+            this.mapLabelsCheckBox.UseVisualStyleBackColor = false;
+            this.mapLabelsCheckBox.CheckedChanged += new System.EventHandler(this.mapLabelsCheckBox_CheckedChanged);
+            // 
             // MapForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(1014, 761);
+            this.ClientSize = new System.Drawing.Size(1014, 585);
+            this.Controls.Add(this.mapLabelsCheckBox);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -269,8 +284,9 @@
             this.Controls.Add(this.startAndStopButton);
             this.Controls.Add(this.statsListView);
             this.DoubleBuffered = true;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(2);
-            this.MinimumSize = new System.Drawing.Size(1024, 500);
+            this.MinimumSize = new System.Drawing.Size(800, 500);
             this.Name = "MapForm";
             this.Text = "The Dopey World War";
             this.ResizeEnd += new System.EventHandler(this.MapForm_ResizeEnd);
@@ -278,6 +294,7 @@
             this.SizeChanged += new System.EventHandler(this.MapForm_SizeChanged);
             this.startGroupBox.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -300,6 +317,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.CheckBox mapLabelsCheckBox;
     }
 }
 

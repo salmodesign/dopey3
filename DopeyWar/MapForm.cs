@@ -44,14 +44,11 @@ namespace DopeyWar
             _programIsfinished = false;
 
             _maplabels = new List <Label>();
-
-   
         }
         #region Events
 
         private void startAndStopButton_Click(object sender, EventArgs e)
-        {
-            
+        {  
             StartAndStop();
         }
         
@@ -121,11 +118,15 @@ namespace DopeyWar
         {
             startGroupBox.Visible = false;
             startAndStopButton.Enabled = true;
-            _ww3 = new War(_startEndurance);  
+            FormResizeAllowed(true);
+
+            _ww3 = new War(_startEndurance);
             UpDateStatsList(_ww3.GetSortedList());
               
             foreach (var item in Scaling.GetInstance().AllScalebleObjects())
                 CreateMapLabel(item);
+
+            UpdateAllMapLabels();
         }
         #endregion Events
 
@@ -134,9 +135,10 @@ namespace DopeyWar
         {
             if (!_scaleIsSet)
             {
-                HideAllMapLabels();
-
-                DisableFormResizing();
+                mapLabelsCheckBox.Checked = false;
+                mapLabelsCheckBox.Enabled = false;
+                UpdateAllMapLabels();
+                FormResizeAllowed(false);
                 _scaleIsSet = true;
             }
             if (_timer.Enabled == false)
@@ -202,6 +204,10 @@ namespace DopeyWar
             for (int i=0; i < MapLabels.Length; i++)
             {
                 MapLabels[i].Location = new Point(obj.PosX, obj.PosY);
+                if (mapLabelsCheckBox.Checked == true)
+                    MapLabels[i].Visible = true;
+                else
+                    MapLabels[i].Visible = false;
             }
         }
 
@@ -220,11 +226,20 @@ namespace DopeyWar
             }
         }
 
-        private void DisableFormResizing()
+        private void FormResizeAllowed(bool isAllowed)
         {
-            MaximizeBox = false;
-            MinimizeBox = false;
-            FormBorderStyle = FormBorderStyle.FixedSingle;
+            if (isAllowed)
+            {
+                MaximizeBox = true;
+                MinimizeBox = true;
+                FormBorderStyle = FormBorderStyle.Sizable;
+            }
+            else
+            {
+                MaximizeBox = false;
+                MinimizeBox = false;
+                FormBorderStyle = FormBorderStyle.FixedSingle;
+            }
         }
 
         private void MapForm_ResizeEnd(object sender, EventArgs e)
@@ -242,6 +257,11 @@ namespace DopeyWar
                 }
                 _lastWindowState = WindowState;
             }
+        }
+
+        private void mapLabelsCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            UpdateAllMapLabels();
         }
 
 
