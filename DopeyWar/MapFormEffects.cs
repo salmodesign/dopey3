@@ -23,7 +23,12 @@ namespace DopeyWar
         private SoundPlayer _rocketSound;
         private SoundPlayer _bombSound;
 
-        private void CreateMissilePath(Nation begin, Nation end)
+        /// <summary>
+        /// Method for create a path between two objects that have X and Y coordinates
+        /// </summary>
+        /// <param name="begin"></param>
+        /// <param name="end"></param>
+        private void CreateMissilePath(IScaleable begin, IScaleable end)
         {
             double distance = Math.Sqrt((Math.Pow(begin.PosX - end.PosX, 2) + Math.Pow(begin.PosY - end.PosY, 2)));
 
@@ -108,15 +113,15 @@ namespace DopeyWar
             fg.Dispose();
         }
 
-        private void CelebrateWinner(Nation winner)
+        private void CelebrateWinner(IScaleable winner)
         {
             Point winnerPoint = new Point(winner.PosX, winner.PosY);
             Point labelWinnerPoint = new Point(winner.PosX, winner.PosY - 25);
 
-            Controls.Add(new Label { Location = labelWinnerPoint, AutoSize = true, BackColor = Color.Black, ForeColor = Color.Green, Text = winner + "\nWINNER" });
+            Controls.Add(new Label { Location = labelWinnerPoint, AutoSize = true, BackColor = Color.Black, ForeColor = Color.Green, Text = winner.Name + "\nWINNER" });
 
-            string name = @"..\..\" + winner.ToString() + ".gif";
-            string sound = @"..\..\" + winner.ToString() + ".wav";
+            string name = @"..\..\" + winner.Name + ".gif";
+            string sound = @"..\..\" + winner.Name + ".wav";
             PictureBox pb = new PictureBox()
             {
                 Location = winnerPoint,
@@ -131,10 +136,10 @@ namespace DopeyWar
             _anthemSound.Play();
         }
 
-        private void DisplayDefeated(Nation defender)
+        private void DisplayDefeated(IScaleable defender)
         {
             Point defenderPoint = new Point(defender.PosX, defender.PosY);
-            Controls.Add(new Label { Location = defenderPoint, AutoSize = true, BackColor = Color.Black, ForeColor = Color.Red, Text = defender + "\nDEFEATED" });
+            Controls.Add(new Label { Location = defenderPoint, AutoSize = true, BackColor = Color.Black, ForeColor = Color.Red, Text = defender.Name + "\nDEFEATED" });
 
             warActivityLabel.Text += "\n" + defender + " defeated!";
 

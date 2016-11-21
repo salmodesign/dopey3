@@ -16,6 +16,7 @@ namespace DopeyWar
         public int PosX { get; set; }
         public int PosY { get; set; }
         public string Name { get { return _name; } }
+
         public int Endurance { get { return _endurance; }}
         public int Shots { get { return _shots; } }
         public int Kills { get { return _kills; } }
