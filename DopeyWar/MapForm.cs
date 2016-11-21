@@ -52,18 +52,23 @@ namespace DopeyWar
             StartAndStop();
         }
         
+        /// <summary>
+        /// Main timer event, uses a counter to perform tasks in the right 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void _timer_Tick(object sender, EventArgs e)
         {
             if (_timerCounter == 0)
             {
                 _ww3.CreateAttack();
                 warActivityLabel.Text = _ww3.Attacker + " attacks " + _ww3.Defender;
-                CreateMissilePath(_ww3.Attacker, _ww3.Defender);
+                CreateMissilePath(_ww3.Attacker, _ww3.Defender); //The path is created...
                 PlayRocketSound();
             }
 
             if (_timerCounter >= 1 && _timerCounter <= 32)
-                DrawMissilePath();
+                DrawMissilePath();                              //..and drawn step by step
             
             if (_timerCounter == 33)
             {
@@ -126,7 +131,7 @@ namespace DopeyWar
             foreach (var item in Scaling.GetInstance().AllScalebleObjects())
                 CreateMapLabel(item);
 
-            UpdateAllMapLabels();
+            UpdateAllMapLabels(); 
         }
 
         private void MapForm_ResizeEnd(object sender, EventArgs e)

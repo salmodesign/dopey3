@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DopeyWar
 {
-    public class Ocean : IScaleable
+    public class Ocean : IScaleable //Ocean class for demo purpose
     {
         private string _name;
 
